@@ -8,7 +8,7 @@ It shows the product experience and the architecture. It does not make Gulf tech
 
 ## How to run
 Unzip and double-click `index.html` (Chrome recommended). No server, install or internet connection is needed.
-To show the official logo, save it as `assets/gulf-logo.png` (see `assets/README.txt`).
+The official Gulf logo supplied for the prototype is included as `assets/gulf-logo.png` and is used unmodified in the header and footer.
 "Reset prototype data" in the footer clears passports, samples and analytics stored in the browser.
 
 ## Platform architecture
@@ -82,7 +82,7 @@ Seams in the code are marked `PRODUCTION:`. `Store` (browser storage) becomes au
 - Customer accounts, consent, access control and data retention for equipment, analysis and location data
 - Server-side rendering of entity pages and JSON-LD so crawlers and AI engines read them without JavaScript
 - A grounded AI advisor with guardrails and escalation to a human expert
-- Alignment with the live site's design system, official logo and pack imagery
+- Alignment with the live site's design system and pack imagery
 - Accessibility audit and performance budget
 
 ## Prototype-only assumptions

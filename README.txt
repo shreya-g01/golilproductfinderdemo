@@ -1,5 +1,6 @@
 LOGO
-Place the official Gulf logo here as:  gulf-logo.png
+The official Gulf logo supplied for this prototype is saved here as:  gulf-logo.png
+To replace it, overwrite that file with another official asset
 (transparent background, 240 px wide or larger; shown at 50 px height).
 The header and footer load assets/gulf-logo.png automatically. Until the file
 exists, a dashed "GULF LOGO" placeholder box is shown.
