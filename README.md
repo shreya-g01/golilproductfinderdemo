@@ -1,79 +1,97 @@
-# Gulf Product & Application Finder 2.0 – Prototype
+# Gulf Lubrication Intelligence – Prototype
 
-Concept prototype for the Gulf Oil Lubricants India website revamp. All data is demonstration data.
+Concept prototype for the Gulf Oil Lubricants India website revamp. **All data is demo / illustrative.**
 
-## 1. How to run
-Unzip, then double-click `index.html` (Chrome recommended). No server, install or internet connection is needed.
-To show the official logo, save it as `assets/gulf-logo.png` (see `assets/README.txt`). Until then a labelled placeholder is shown.
+## What this prototype is
+A working front-end prototype of a connected lubrication platform: seven modules that read one shared data model.
+It shows the product experience and the architecture. It does not make Gulf technical claims.
 
-## 2. What it demonstrates
-1. Multi-path discovery: vehicle, equipment, industry, application, specification, problem, product
-2. Application-based recommendations with a "Why this product?" explanation
-3. Equipment / OEM / model relationships
-4. Specification matching (API, ACEA, JASO, ILSAC, ISO VG, DIN, NLGI, SAE)
-5. Problem-based search (problem → solution → product)
-6. Technical data rendered as HTML, with TDS / specification / approval views
-7. Product comparison (up to 3)
-8. Lead capture with validation and a CRM-shaped payload
-9. Distributor and Gulf Garage finder (pincode or city)
-10. SEO/GEO entity architecture: "Explore by" entry points, entity chains, semantic HTML, JSON-LD
+## How to run
+Unzip and double-click `index.html` (Chrome recommended). No server, install or internet connection is needed.
+To show the official logo, save it as `assets/gulf-logo.png` (see `assets/README.txt`).
+"Reset prototype data" in the footer clears passports, samples and analytics stored in the browser.
 
-## 3. Demo journey
-Click **Try a Demo Journey** (top bar or hero). It plays:
-Construction → Backhoe Loader → JCB → 3DX → Heavy duty → High temperature → recommendation.
+## Platform architecture
+```
+index.html   page shell, header, footer, SEO metadata, JSON-LD slots
+style.css    Gulf-style design system
+data.js      central data layer (gulfData) – the only source of data
+app.js       routing, engines (search, recommendation, advisor, oil analysis, TCO), rendering
+```
+Routes mirror production URLs, for example `#/equipment/jcb/3dx`, `#/products/superfleet-supreme`,
+`#/specifications/api-ck-4`, `#/problems/high-oil-temperature`, `#/knowledge/hydraulic-oil-overheating`,
+`#/industries/construction`, `#/applications/construction`, `#/oems/jcb`.
 
-Suggested management walkthrough (about 5 minutes):
-1. Landing page: six pathways and the search bar
-2. Try a Demo Journey, then read "Why this product?"
-3. Switch the "What are you looking for?" tabs (engine oil, hydraulic fluid, gear oil, grease)
-4. View Product: HTML technical data, compatibility, documents
-5. Add to Compare on two or three products, then Compare Products
-6. Search "API CK-4", then "JCB 3DX"
-7. Talk to a Gulf Technical Expert: submit the form
-8. Find a Distributor: enter "Mumbai"
-9. Management Demo and Prototype Analytics (top bar)
+## The seven modules
+1. **AI Advisor** – rule-based simulated advisor. Recognises equipment, system, operating conditions and oil-analysis parameters, then answers from the shared data. No external AI service.
+2. **Product Finder** – eight entry points (vehicle, equipment, industry, application, problem, specification, product, OEM), "Why this product?" reasoning, comparison of up to three products.
+3. **Equipment Database** – 21 demo machines and vehicles with a lubrication requirements table and links to every other module.
+4. **Oil Analysis** – sample workflow, report with status per parameter, interpretation, recommended action and an interactive trend chart.
+5. **TCO Calculator** – editable inputs, live results, cost breakdown, clearly labelled as illustrative.
+6. **Lubrication Passport** – per-asset record: lubrication profile, timeline, maintenance events, saved TCO scenarios, verified products, demo QR. Stored in the browser.
+7. **Technical Knowledge** – 14 articles in 12 categories plus an interactive knowledge graph.
 
-## 4. Data structure
-All data sits in the `DATA` section of `index.html`.
+Also included: global search, distributor and garage finder, product authentication, reusable expert lead form, analytics dashboard.
 
-| Constant | Holds |
-|---|---|
-| `PRODUCTS` | id, name, category, type (application), viscosity, segments, industries, specifications, approvals, tags (operating conditions and problems), applications, benefits, description, technicalData, tds |
-| `VEHICLES` + `vehicleSystems()` | vehicle type, make, model, fuels → products per need |
-| `EQUIPMENT` + `SYS` | sector, equipment type, OEMs, models → products per system |
-| `TAGS`, `CONDITIONS`, `PROBLEMS` | shared vocabulary linking conditions and problems to products |
-| `locations()` | mock distributors and garages |
+## Demo journey
+**Run Full Demo** (top bar or home page) plays ten steps, about 15 seconds each. Use Next / Pause in the controller to go at your own pace.
+1. Equipment: JCB 3DX
+2. Application: Construction → Backhoe Loader → JCB → 3DX → Heavy duty + High temperature
+3. Product Finder: recommended Gulf product
+4. Why this product?
+5. Oil Analysis: report OA-004, iron flagged, rising trend
+6. AI Advisor interprets the result
+7. TCO Calculator: illustrative cost scenario
+8. Lubrication Passport: JCB 3DX added as JCB-001
+9. Knowledge Graph: relationships highlighted
+10. Lead form: "Request Gulf Technical Assessment" with context carried over
 
-Entity model: Product ↔ Category · Application · Industry · Vehicle · Equipment · OEM · Model · Specification · Approval · Operating condition · Problem · Benefits · Technical data · TDS · Lead CTA.
+**Management Demo** opens a one-screen explanation of what is being built.
 
-## 5. Replacing mock data with a real API
-The UI reads data through `DataService` and `recommend(ctx)`.
-- Replace `DataService` methods with `fetch()` calls (`/api/products`, `/api/products/{id}`, `/api/locations`).
-- Replace `vehicleSystems()` and `SYS` with the validated lubrication chart / OEM specification table.
-- Keep the `recommend(ctx)` contract: input `{subject, trail, systems, need, conditions}`, output `{primary, alternatives, reasons}`.
-- Fill `approvals` from the Gulf technical database; the product page and approvals view already have the slot.
-- Add a pack image URL per product and swap `packSVG()` for an `<img>`.
+## Data architecture
+`gulfData` in `data.js` holds: `products`, `equipment`, `oems`, `industries`, `applications`, `systems`, `conditions`, `problems`,
+`specifications` (derived from products), `oilParams`, `oilAnalysis`, `maintenanceEvents`, `technicalArticles`, `distributors`, `garages`, `authCodes`.
+Records reference each other by id: equipment → OEM, industry, systems → candidate products → specifications; articles → equipment, products, systems, problems, parameters; reports → equipment, system, product.
 
-## 6. Sending leads to Salesforce
-`LeadService.submit(payload)` is the single integration point. The payload already uses Lead-style fields
-(`LastName`, `Company`, `MobilePhone`, `Email`, `City`, `LeadSource`, plus custom fields such as
-`User_Type__c`, `Product_Interest__c`, `CTA__c`, `Finder_Context__c`).
-Production flow: Website form → POST `/api/leads` (middleware: validation, consent, spam control) → Salesforce Web-to-Lead or REST API → assignment rules by user type, city and product.
+## Recommendation engine
+`recommend(ctx)` in `app.js` is a pure function. Input: subject, candidate products per system, active system, operating conditions.
+Output: primary product, alternatives, and the reasons shown under "Why this product?".
+The Finder, Equipment Database, AI Advisor, Passport, TCO Calculator and Knowledge Graph all call it.
+In production, replace the scoring with the validated lubrication chart and OEM specification table and keep the same contract.
 
-## 7. Prototype-only areas
-- Products, grades, specifications, vehicles, equipment models and their mappings are illustrative, not validated
-- OEM approvals are deliberately left empty
-- Recommendation scoring is a simple rule set, not Gulf technical guidance
-- Distributor and garage locations are invented; "Get Directions" opens a map search for the area only
-- Lead form does not send data anywhere; analytics events stay in the browser tab
-- Header, footer and styling follow the brief, not a pixel audit of the live Gulf site
-- Canonical, Open Graph and JSON-LD use placeholder URLs; the page is set to `noindex`
+## Knowledge graph
+`buildGraph(equipment)` generates nodes and edges from the central data for one machine across eleven layers
+(OEM → equipment → application → condition → system → specification → product → evidence → oil analysis → maintenance → TCO) and draws them as SVG.
+Selecting a node highlights everything upstream and downstream. No graph database is used.
 
-## 8. Recommended next steps
-1. Validate product, specification and approval data with the technical team
-2. Build the product / vehicle / equipment master as a structured database (TDS digitization)
-3. Align header, footer and components with the live site's design system and add the official logo and pack shots
-4. Give every entity its own indexable URL (product, OEM, model, industry, application, specification)
-5. Connect the lead form to Salesforce and define routing rules
-6. Connect the locator to the real distributor and garage database
-7. Usability test with mechanics, fleet owners and industrial buyers
+## Future API architecture
+```
+Frontend → API Gateway → Central Gulf Database
+   (Product Data · Equipment Data · Technical Knowledge · Oil Analysis · Customer Data)
+   → Salesforce CRM · ERP · Payment Systems · WhatsApp Business API
+```
+Seams in the code are marked `PRODUCTION:`. `Store` (browser storage) becomes authenticated API calls; `gulfData` becomes API responses.
+
+- **Salesforce** – `LeadService.submit(payload)` already builds a Lead-shaped payload (`LastName`, `Company`, `MobilePhone`, `Email`, `City`, `LeadSource` and custom fields including `Platform_Context__c`). Flow: form → `/api/leads` → validation, consent, spam control → Salesforce → assignment rules.
+- **ERP** – product master, batch data for product authentication, distributor master and pricing.
+- **WhatsApp Business** – lead confirmation, service reminders from the Passport, oil analysis alerts, QR deep links.
+- **Oil analysis** – laboratory system results attached to a sample ID; limits set per product and system by the technical team; flags written to the Passport.
+
+## Production considerations
+- Validate every product, specification, approval, interval and analysis limit with the technical team
+- Customer accounts, consent, access control and data retention for equipment, analysis and location data
+- Server-side rendering of entity pages and JSON-LD so crawlers and AI engines read them without JavaScript
+- A grounded AI advisor with guardrails and escalation to a human expert
+- Alignment with the live site's design system, official logo and pack imagery
+- Accessibility audit and performance budget
+
+## Prototype-only assumptions
+- Products, grades, specifications, equipment mappings, capacities and intervals are illustrative
+- OEM approvals are deliberately empty; OEM names identify equipment and do not imply approval
+- Oil analysis values and limits are invented; user-submitted samples generate values from hours on oil
+- TCO defaults, prices and the Gulf scenario's interval and maintenance impact are editable assumptions, not claims
+- The AI Advisor is rule-based; phrasing outside its patterns gets a general answer
+- The QR is a demo pattern and is not scannable
+- Locations, phone numbers, batch details and analytics seed numbers are invented
+- Leads are not sent anywhere; passports and events are stored only in the browser
+- Header, footer and styling follow the written brief, not an audit of the live Gulf site

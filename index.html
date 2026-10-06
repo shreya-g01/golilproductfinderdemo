@@ -3,268 +3,72 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Product &amp; Application Finder | Find the Right Gulf Lubricant | Gulf Oil Lubricants India (Prototype)</title>
-<meta name="description" content="Find the right Gulf lubricant by vehicle, equipment, industry, application, specification or operating problem. Prototype of Product & Application Finder 2.0.">
-<!-- PRODUCTION: replace with the real canonical URL of the Finder page -->
-<link rel="canonical" href="https://www.example-gulf-domain.in/product-finder">
+<title>Gulf Lubrication Intelligence | Gulf Oil Lubricants India (Prototype)</title>
+<meta name="description" content="Know your machine. Choose the right lubricant. Monitor performance. Optimize cost. Prototype of the Gulf Lubrication Intelligence platform.">
+<!-- PRODUCTION: canonical is generated per entity page, e.g. /equipment/jcb/3dx -->
+<link rel="canonical" href="https://www.example-gulf-domain.in/lubrication-intelligence">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Find the Right Gulf Lubricant | Product & Application Finder">
-<meta property="og:description" content="Search by vehicle, equipment, application, industry or specification.">
-<meta property="og:url" content="https://www.example-gulf-domain.in/product-finder">
+<meta property="og:title" content="Gulf Lubrication Intelligence">
+<meta property="og:description" content="Equipment, lubricant, oil condition, cost and technical knowledge in one place.">
+<meta property="og:url" content="https://www.example-gulf-domain.in/lubrication-intelligence">
 <meta property="og:image" content="assets/og-placeholder.png">
 <meta name="robots" content="noindex, nofollow"><!-- prototype only: remove in production -->
+<link rel="stylesheet" href="style.css">
 
 <!-- JSON-LD: Organization. PRODUCTION: inject verified corporate data from the CMS. -->
 <script type="application/ld+json" id="ld-organization">
-{"@context":"https://schema.org","@type":"Organization","name":"Gulf Oil Lubricants India Limited","url":"https://www.example-gulf-domain.in/","logo":"https://www.example-gulf-domain.in/assets/gulf-logo.png","sameAs":[]}
+{"@context":"https://schema.org","@type":"Organization","name":"Gulf Oil Lubricants India Limited","url":"https://www.example-gulf-domain.in/","logo":"https://www.example-gulf-domain.in/assets/gulf-logo.png"}
 </script>
-<!-- JSON-LD: BreadcrumbList. PRODUCTION: generate per page from the URL/entity path. -->
-<script type="application/ld+json" id="ld-breadcrumb">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example-gulf-domain.in/"},{"@type":"ListItem","position":2,"name":"Product Finder","item":"https://www.example-gulf-domain.in/product-finder"}]}
-</script>
-<!-- JSON-LD: Product. Filled by renderProduct() from the product record. PRODUCTION: render server-side from the product database. -->
-<script type="application/ld+json" id="ld-product">{}</script>
-
-<style>
-/* ============ TOKENS ============ */
-:root{
-  --blue:#0b2a5b;      /* Gulf blue (navigation, headings) */
-  --blue-2:#12407f;
-  --orange:#f26522;    /* Gulf orange (actions, highlights) */
-  --orange-d:#c9480c;  /* orange for text on white (contrast) */
-  --ink:#1c2533; --muted:#5b6676; --line:#dfe3ea; --bg:#f4f5f7; --white:#fff;
-  --ok:#1e6b45; --radius:4px; --wrap:1200px;
-  --font:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-}
-*{box-sizing:border-box}
-[hidden]{display:none!important}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:var(--font);color:var(--ink);background:var(--white);font-size:16px;line-height:1.55}
-h1,h2,h3,h4{color:var(--blue);line-height:1.2;margin:0 0 .5em;font-weight:800}
-h1{font-size:clamp(28px,4.2vw,46px);letter-spacing:-.5px}
-h2{font-size:clamp(22px,2.6vw,30px)}
-h3{font-size:19px} h4{font-size:16px}
-p{margin:0 0 1em}
-button{font:inherit;cursor:pointer}
-:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
-.skip{position:absolute;left:-999px;top:0;background:var(--orange);color:#fff;padding:10px 16px;z-index:999}
-.skip:focus{left:8px;top:8px}
-.eyebrow{font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--orange-d);margin-bottom:8px}
-.muted{color:var(--muted)} .small{font-size:14px}
-.demo-badge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#6a4a00;background:#fff3d6;border:1px solid #f0d58a;padding:1px 6px;border-radius:2px;vertical-align:middle}
-
-/* ============ BUTTONS ============ */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 22px;border-radius:var(--radius);border:2px solid var(--orange);background:var(--orange);color:#1a0d05;font-weight:800;text-transform:uppercase;letter-spacing:.6px;font-size:14px;text-decoration:none}
-.btn:hover{background:#ff7a3a;border-color:#ff7a3a}
-.btn.sec{background:#fff;border-color:var(--blue);color:var(--blue)}
-.btn.sec:hover{background:var(--blue);color:#fff}
-.btn.ghost{background:transparent;border-color:#fff;color:#fff}
-.btn.ghost:hover{background:#fff;color:var(--blue)}
-.btn.sm{min-height:38px;padding:6px 14px;font-size:13px}
-.link{background:none;border:0;color:var(--blue-2);font-weight:700;padding:0;text-decoration:underline;text-underline-offset:3px}
-.link:hover{color:var(--orange-d)}
-
-/* ============ PROTOTYPE BAR + HEADER ============ */
-.protobar{background:#0a1c3d;color:#dbe4f3;font-size:13px}
-.protobar .wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px}
-.protobar strong{color:#ffb489;letter-spacing:1px}
-.protobar .sp{flex:1}
-.protobar button{background:transparent;border:1px solid #47608c;color:#fff;border-radius:3px;padding:4px 10px;font-size:13px;font-weight:700}
-.protobar button:hover{background:#17336a}
-.protobar button.hot{background:var(--orange);border-color:var(--orange);color:#1a0d05}
-.site-header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
-.site-header .wrap{display:flex;align-items:center;gap:28px;min-height:76px}
-.logo{background:none;border:0;padding:0;display:flex;align-items:center}
-.logo-img{height:52px;width:auto;display:block}
-.logo-ph{display:flex;flex-direction:column;justify-content:center;align-items:center;height:52px;width:118px;border:2px dashed #9aa6b8;color:var(--blue);font-weight:800;font-size:13px;letter-spacing:1px;line-height:1.2;background:#f7f9fc}
-.logo-ph small{font-size:9px;font-weight:600;letter-spacing:.3px;color:var(--muted);text-transform:none}
-.main-nav{display:flex;gap:4px;flex:1}
-.main-nav button{background:none;border:0;border-bottom:3px solid transparent;padding:26px 12px 23px;font-weight:700;color:var(--blue);text-transform:uppercase;font-size:14px;letter-spacing:.5px}
-.main-nav button:hover,.main-nav button[aria-current=page]{border-bottom-color:var(--orange)}
-.hamb{display:none;background:none;border:2px solid var(--blue);border-radius:3px;width:46px;height:46px;font-size:22px;color:var(--blue);margin-left:auto}
-
-/* ============ HERO ============ */
-.crumbs{background:var(--bg);border-bottom:1px solid var(--line);font-size:14px}
-.crumbs .wrap{padding-top:10px;padding-bottom:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.crumbs span.sep{color:#9aa6b8}
-.hero{background:linear-gradient(115deg,var(--blue) 0 68%,var(--orange) 68% 71%,var(--blue-2) 71%);color:#fff}
-.hero .wrap{padding-top:56px;padding-bottom:56px}
-.hero h1{color:#fff;max-width:720px}
-.hero p.lead{font-size:19px;max-width:640px;color:#dbe4f3}
-.hero .eyebrow{color:#ffb489}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0 26px}
-.searchbar{display:flex;max-width:760px;background:#fff;border-radius:var(--radius);overflow:hidden;border:2px solid #fff}
-.searchbar input{flex:1;border:0;padding:14px 16px;font:inherit;min-width:0;color:var(--ink)}
-.searchbar input:focus{outline:3px solid var(--orange);outline-offset:-3px}
-.searchbar button{border:0;background:var(--orange);color:#1a0d05;font-weight:800;padding:0 22px;text-transform:uppercase;letter-spacing:.5px}
-.searchbar.light{border-color:var(--blue)}
-.examples{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center;font-size:14px}
-.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;color:var(--blue);border-radius:3px;padding:6px 12px;font-size:14px;font-weight:600}
-button.chip:hover{border-color:var(--orange);color:var(--orange-d)}
-.chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
-.hero .chip{background:transparent;border-color:#5c77a6;color:#fff}
-.hero button.chip:hover{border-color:var(--orange);color:#ffb489}
-.tag{display:inline-block;background:#eaf0f8;color:var(--blue);border-radius:2px;padding:3px 9px;font-size:13px;font-weight:700;margin:0 6px 6px 0}
-
-/* ============ SECTIONS / CARDS ============ */
-section.band{padding:48px 0}
-section.band.grey{background:var(--bg)}
-.grid{display:grid;gap:18px}
-.g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
-.card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--blue);border-radius:var(--radius);padding:22px}
-button.opt{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;width:100%;min-height:110px;background:#fff;border:1px solid var(--line);border-top:4px solid var(--blue);border-radius:var(--radius);padding:20px;color:var(--ink)}
-button.opt:hover,button.opt.demo-pick{border-top-color:var(--orange);box-shadow:0 6px 18px rgba(11,42,91,.12)}
-button.opt.demo-pick{outline:3px solid var(--orange)}
-button.opt .ico{font-size:30px;line-height:1}
-button.opt strong{font-size:18px;color:var(--blue)}
-button.opt span.sub{font-size:14px;color:var(--muted)}
-button.opt.sel{border-color:var(--orange);border-top-color:var(--orange);background:#fff6f0}
-button.opt.sel strong::after{content:" ✓";color:var(--orange-d)}
-.path-card{min-height:150px}
-.disclaimer{font-size:13px;color:var(--muted);border-left:3px solid #f0d58a;background:#fffaf0;padding:10px 14px;margin:24px 0 0}
-
-/* entity chain */
-.chain{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.chain .node{background:var(--blue);color:#fff;border:0;border-radius:3px;padding:8px 14px;font-weight:700;font-size:14px}
-.chain .node.p{background:var(--orange);color:#1a0d05}
-.chain .node.e{background:#eaf0f8;color:var(--blue)}
-.chain .arr{color:var(--muted);font-weight:800}
-
-/* wizard */
-.trail{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 18px;font-size:14px}
-.trail .tag{margin:0}
-.steps{display:flex;gap:6px;margin:0 0 22px;padding:0;list-style:none}
-.steps li{flex:1;height:6px;background:var(--line);border-radius:3px}
-.steps li.done{background:var(--blue)} .steps li.cur{background:var(--orange)}
-.wiz-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;align-items:center}
-
-/* recommendation */
-.reco{display:grid;grid-template-columns:200px 1fr;gap:28px;background:#fff;border:1px solid var(--line);border-left:8px solid var(--orange);border-radius:var(--radius);padding:28px}
-.reco .pack{width:170px}
-.pack{width:100%;max-width:150px;height:auto;display:block;margin:0 auto}
-.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:14px 0}
-.kv div{background:var(--bg);padding:10px 12px;border-radius:3px}
-.kv dt{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:700}
-.kv dd{margin:2px 0 0;font-weight:700;color:var(--blue)}
-.why{list-style:none;padding:0;margin:0}
-.why li{padding:10px 0 10px 34px;border-bottom:1px solid var(--line);position:relative}
-.why li::before{content:"✓";position:absolute;left:4px;top:8px;color:var(--ok);font-weight:900;font-size:18px}
-.why li.warn::before{content:"!";color:var(--orange-d)}
-.logic{display:grid;grid-template-columns:1fr auto 1fr auto 1.4fr;gap:16px;align-items:stretch}
-.logic .arr{align-self:center;font-size:26px;color:var(--orange-d);font-weight:900}
-.cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 18px}
-.pcard{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-.pcard .img{background:linear-gradient(180deg,#eef2f8,#fff);padding:18px;border-bottom:1px solid var(--line)}
-.pcard .img .pack{max-width:96px}
-.pcard .body{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
-.pcard .cat{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--orange-d)}
-.pcard h3{margin:0;font-size:18px}
-.pcard .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:10px}
-table.tbl{width:100%;border-collapse:collapse;background:#fff}
-table.tbl th,table.tbl td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
-table.tbl th{background:var(--blue);color:#fff;font-weight:700}
-table.tbl tr th[scope=row]{background:var(--bg);color:var(--blue);width:210px}
-.tblwrap{overflow-x:auto}
-.phead{display:grid;grid-template-columns:240px 1fr;gap:32px;align-items:center}
-.field{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
-.field label{font-weight:700;font-size:14px;color:var(--blue)}
-.field input,.field select,.field textarea{font:inherit;padding:11px 12px;border:1px solid #aab3c2;border-radius:3px;width:100%;background:#fff;color:var(--ink)}
-.field .err{color:#b3261e;font-size:13px;min-height:0}
-.field.bad input,.field.bad select{border-color:#b3261e}
-.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
-.loc-form{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
-.loc-form .field{flex:1;min-width:180px;margin:0}
-
-/* compare tray, bottom nav, modal, toast */
-#tray{position:fixed;left:0;right:0;bottom:0;background:var(--blue);color:#fff;z-index:60;box-shadow:0 -4px 16px rgba(0,0,0,.2)}
-#tray .wrap{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
-#tray .chip{background:#17336a;border-color:#47608c;color:#fff}
-.bottom-nav{display:none}
-.modal-bg{position:fixed;inset:0;background:rgba(10,20,40,.62);z-index:100;display:flex;align-items:flex-start;justify-content:center;padding:4vh 14px;overflow:auto}
-.modal{background:#fff;border-radius:var(--radius);border-top:6px solid var(--orange);max-width:680px;width:100%;padding:26px;position:relative}
-.modal .x{position:absolute;right:12px;top:10px;background:none;border:0;font-size:26px;color:var(--muted);width:44px;height:44px}
-.modal ol{padding-left:22px} .modal ol li{margin-bottom:8px}
-#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#1c2533;color:#fff;padding:12px 18px;border-radius:3px;z-index:120;max-width:90vw;font-size:14px}
-#toast:empty{display:none}
-.evt{font-family:Consolas,monospace;font-size:13px;border-bottom:1px solid var(--line);padding:6px 0;word-break:break-word}
-
-/* footer */
-footer.site{background:#0a1c3d;color:#c9d4e6;margin-top:0;padding:44px 0 110px}
-footer.site h4{color:#fff;text-transform:uppercase;letter-spacing:1px;font-size:14px}
-footer.site ul{list-style:none;padding:0;margin:0}
-footer.site li{margin-bottom:6px}
-footer.site button.fl{background:none;border:0;color:#c9d4e6;padding:2px 0;text-align:left}
-footer.site button.fl:hover{color:#ffb489;text-decoration:underline}
-.fgrid{display:grid;grid-template-columns:1.2fr repeat(4,1fr);gap:28px}
-.fbot{border-top:1px solid #2a416b;margin-top:28px;padding-top:16px;display:flex;gap:16px;flex-wrap:wrap;font-size:13px;align-items:center}
-.social{display:flex;gap:8px}
-.social button{width:36px;height:36px;border-radius:50%;border:1px solid #47608c;background:none;color:#fff;font-weight:800;font-size:12px}
-
-/* ============ RESPONSIVE ============ */
-@media (max-width:1000px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}.fgrid{grid-template-columns:repeat(2,1fr)}.logic{grid-template-columns:1fr}.logic .arr{transform:rotate(90deg);justify-self:center}}
-@media (max-width:760px){
-  .hamb{display:block}
-  .main-nav{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;flex-direction:column;border-bottom:3px solid var(--orange);padding:6px 20px 14px}
-  .main-nav.open{display:flex}
-  .main-nav button{padding:14px 4px;border-bottom:1px solid var(--line);text-align:left}
-  .site-header .wrap{min-height:64px;position:relative}
-  .logo-img,.logo-ph{height:44px}
-  .hero{background:var(--blue);border-bottom:6px solid var(--orange)}
-  .hero .wrap{padding-top:30px;padding-bottom:30px}
-  .hero p.lead{font-size:16px}
-  .g2,.g3{grid-template-columns:1fr}.g4{grid-template-columns:1fr 1fr}
-  .grid.products{grid-template-columns:1fr}
-  .reco,.phead{grid-template-columns:1fr}
-  .formgrid{grid-template-columns:1fr}
-  section.band{padding:32px 0}
-  button.opt{min-height:84px;padding:16px}
-  .btn{width:100%}
-  .cta-row .btn,.wiz-actions .btn{width:100%}
-  .protobar .lbl{display:none}
-  .bottom-nav{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);z-index:55}
-  .bottom-nav button{background:none;border:0;padding:8px 2px 10px;font-size:11px;font-weight:700;color:var(--blue);display:flex;flex-direction:column;align-items:center;gap:2px;min-height:58px}
-  .bottom-nav button .i{font-size:20px}
-  .bottom-nav button.main{background:var(--orange);color:#1a0d05}
-  #tray{bottom:58px}
-  #toast{bottom:130px}
-  footer.site{padding-bottom:150px}
-  .fgrid{grid-template-columns:1fr 1fr}
-}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-</style>
+<!-- JSON-LD: BreadcrumbList. Rewritten on every route by app.js (setBreadcrumbLD). PRODUCTION: server-rendered per URL. -->
+<script type="application/ld+json" id="ld-breadcrumb">{}</script>
+<!-- JSON-LD: page entity. Rewritten per route by app.js (setLD):
+     Product on /products/{id} · Article on /knowledge/{slug} · FAQPage on /equipment/{oem}/{model}
+     · LocalBusiness list on /locator · Product "isRelatedTo" equipment for vehicle/product relationships.
+     PRODUCTION: generate server-side from the central database so crawlers and AI engines read it without JavaScript. -->
+<script type="application/ld+json" id="ld-entity">{}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <div class="protobar" role="region" aria-label="Prototype controls">
   <div class="wrap">
-    <strong>PROTOTYPE</strong><span class="lbl">Product &amp; Application Finder 2.0 concept · demonstration data</span>
+    <strong>PROTOTYPE</strong><span class="lbl">Gulf Lubrication Intelligence concept · demo / illustrative data</span>
     <span class="sp"></span>
-    <button class="hot" data-act="demo">▶ Try a Demo Journey</button>
+    <button class="hot" data-act="demo">▶ Run Full Demo</button>
     <button data-act="mgmt">Management Demo</button>
-    <button data-act="analytics">Prototype Analytics</button>
+    <a href="#/analytics">Prototype Analytics</a>
   </div>
 </div>
 
 <header class="site-header">
-  <div class="wrap">
-    <!-- LOGO: drop the official file at assets/gulf-logo.png (or .svg and change src). The placeholder shows only when no file is found. Do not redraw the logo. -->
-    <button class="logo" data-act="home" aria-label="Gulf Oil Lubricants India – Finder home">
+  <div class="wrap row1">
+    <!-- LOGO: save the official file as assets/gulf-logo.png. The placeholder shows only when no file is found. Do not redraw the logo. -->
+    <a class="logo" href="#/" aria-label="Gulf Lubrication Intelligence home">
       <img class="logo-img" src="assets/gulf-logo.png" alt="Gulf" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
       <span class="logo-ph" hidden>GULF LOGO<small>official asset goes here</small></span>
-    </button>
-    <nav class="main-nav" id="mainnav" aria-label="Primary">
-      <button data-act="catalogue">Products</button>
-      <button data-act="path" data-arg="industry">Industries</button>
-      <button data-act="path" data-arg="application">Applications</button>
-      <button data-act="locator" data-arg="distributor">Services</button>
-      <button data-act="mgmt">About Gulf</button>
-      <button data-act="lead" data-arg="expert">Contact</button>
-    </nav>
-    <button class="hamb" data-act="menu" aria-label="Open menu" aria-expanded="false" aria-controls="mainnav">☰</button>
+    </a>
+    <form class="gsearch" data-form="gsearch" role="search">
+      <label class="sr" for="gq">Search equipment, products, specifications and knowledge</label>
+      <input id="gq" name="q" type="search" autocomplete="off" placeholder="Search equipment, product, specification, problem…">
+      <button type="submit" aria-label="Search">Search</button>
+    </form>
+    <a class="btn sm sec hdr-cta" href="#/locator/distributor">Find a Distributor</a>
+    <button class="btn sm hdr-cta" data-act="lead" data-arg="expert">Talk to an Expert</button>
+    <button class="hamb" data-act="menu" aria-label="Open menu" aria-expanded="false" aria-controls="modnav">☰</button>
   </div>
+  <nav class="modnav" id="modnav" aria-label="Gulf Lubrication Intelligence">
+    <div class="wrap">
+      <span class="brand">Gulf Lubrication Intelligence</span>
+      <a href="#/" data-nav="">Home</a>
+      <a href="#/advisor" data-nav="advisor">AI Advisor</a>
+      <a href="#/finder" data-nav="finder">Product Finder</a>
+      <a href="#/equipment" data-nav="equipment">Equipment Database</a>
+      <a href="#/oil-analysis" data-nav="oil-analysis">Oil Analysis</a>
+      <a href="#/tco" data-nav="tco">TCO Calculator</a>
+      <a href="#/passport" data-nav="passport">My Lubrication Passport</a>
+      <a href="#/knowledge" data-nav="knowledge">Technical Knowledge</a>
+    </div>
+  </nav>
 </header>
 
 <main id="main" tabindex="-1"><div id="app"></div></main>
@@ -273,773 +77,46 @@ footer.site button.fl:hover{color:#ffb489;text-decoration:underline}
   <div class="wrap">
     <div class="fgrid">
       <div>
-        <img class="logo-img" src="assets/gulf-logo.png" alt="Gulf" style="margin-bottom:12px" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="logo-ph" style="margin-bottom:12px" hidden>GULF LOGO<small>official asset goes here</small></span>
-        <p class="small">Product &amp; Application Finder 2.0 – concept prototype for the Gulf Oil Lubricants India website revamp.</p>
-        <div class="social" aria-label="Social media (placeholders)">
-          <button data-act="ext" data-arg="Facebook" aria-label="Facebook">f</button>
-          <button data-act="ext" data-arg="LinkedIn" aria-label="LinkedIn">in</button>
-          <button data-act="ext" data-arg="YouTube" aria-label="YouTube">▶</button>
-          <button data-act="ext" data-arg="Instagram" aria-label="Instagram">ig</button>
-        </div>
+        <img class="logo-img" src="assets/gulf-logo.png" alt="Gulf" style="margin-bottom:12px" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+        <span class="logo-ph" style="margin-bottom:12px" hidden>GULF LOGO<small>official asset goes here</small></span>
+        <p class="small">Gulf Lubrication Intelligence – concept prototype for the Gulf Oil Lubricants India website revamp.</p>
       </div>
+      <div><h4>Platform</h4><ul>
+        <li><a href="#/advisor">AI Advisor</a></li><li><a href="#/finder">Product Finder</a></li><li><a href="#/equipment">Equipment Database</a></li>
+        <li><a href="#/oil-analysis">Oil Analysis</a></li><li><a href="#/tco">TCO Calculator</a></li><li><a href="#/passport">Lubrication Passport</a></li></ul></div>
       <div><h4>Products</h4><ul>
-        <li><button class="fl" data-act="cat" data-arg="PCMO">Automotive</button></li>
-        <li><button class="fl" data-act="cat" data-arg="CVO">Commercial Vehicles</button></li>
-        <li><button class="fl" data-act="cat" data-arg="IND">Industrial</button></li>
-        <li><button class="fl" data-act="cat" data-arg="AGRI">Agriculture</button></li>
-        <li><button class="fl" data-act="cat" data-arg="EV">EV</button></li></ul></div>
-      <div><h4>Applications</h4><ul>
-        <li><button class="fl" data-act="search" data-arg="Passenger cars">Passenger Cars</button></li>
-        <li><button class="fl" data-act="search" data-arg="Motorcycle">Motorcycles</button></li>
-        <li><button class="fl" data-act="search" data-arg="Truck">Trucks</button></li>
-        <li><button class="fl" data-act="search" data-arg="Construction">Construction</button></li>
-        <li><button class="fl" data-act="search" data-arg="Agriculture">Agriculture</button></li>
-        <li><button class="fl" data-act="search" data-arg="Industrial">Industrial</button></li></ul></div>
+        <li><a href="#/products?cat=PCMO">Automotive</a></li><li><a href="#/products?cat=CVO">Commercial Vehicles</a></li><li><a href="#/products?cat=IND">Industrial</a></li>
+        <li><a href="#/products?cat=AGRI">Agriculture</a></li><li><a href="#/products?cat=EV">EV</a></li><li><a href="#/verify">Verify Your Gulf Product</a></li></ul></div>
+      <div><h4>Explore</h4><ul>
+        <li><a href="#/industries/construction">Construction</a></li><li><a href="#/industries/agriculture">Agriculture</a></li><li><a href="#/industries/transport">Transport &amp; Fleet</a></li>
+        <li><a href="#/specifications">Specifications</a></li><li><a href="#/knowledge">Technical Knowledge</a></li><li><a href="#/graph">Knowledge Graph</a></li></ul></div>
       <div><h4>Support</h4><ul>
-        <li><button class="fl" data-act="home">Product Finder</button></li>
-        <li><button class="fl" data-act="spec">Technical Information</button></li>
-        <li><button class="fl" data-act="catalogue">TDS</button></li>
-        <li><button class="fl" data-act="locator" data-arg="distributor">Distributor Locator</button></li>
-        <li><button class="fl" data-act="lead" data-arg="expert">Contact Gulf</button></li></ul></div>
-      <div><h4>Company</h4><ul>
-        <li><button class="fl" data-act="ext" data-arg="About Gulf">About Gulf</button></li>
-        <li><button class="fl" data-act="ext" data-arg="Careers">Careers</button></li>
-        <li><button class="fl" data-act="ext" data-arg="News">News</button></li>
-        <li><button class="fl" data-act="lead" data-arg="expert">Contact</button></li></ul></div>
+        <li><a href="#/locator/distributor">Find a Distributor</a></li><li><a href="#/locator/garage">Find a Gulf Garage</a></li>
+        <li><a href="#/" data-act="lead" data-arg="expert">Talk to an Expert</a></li><li><a href="#/analytics">Prototype Analytics</a></li>
+        <li><a href="#/" data-act="resetdata">Reset prototype data</a></li></ul></div>
     </div>
     <div class="fbot">
-      <span>© Gulf Oil Lubricants India Limited. Prototype – not a live website.</span>
-      <button class="fl" data-act="ext" data-arg="Privacy Policy">Privacy</button>
-      <button class="fl" data-act="ext" data-arg="Terms of Use">Terms</button>
+      <p>© Gulf Oil Lubricants India Limited. Prototype – not a live website.</p>
+      <p>This prototype uses demonstration data. Product specifications, approvals, intervals, prices, analysis limits and savings are illustrative and must be validated against current Gulf technical documentation. Production implementation would require appropriate data governance, consent, authentication, security and integration controls.</p>
     </div>
-    <p class="disclaimer" style="background:transparent;color:#c9d4e6">Prototype demonstration data. Product specifications and approvals should be validated against current Gulf technical documentation before production use.</p>
   </div>
 </footer>
 
 <div id="tray" hidden></div>
 <nav class="bottom-nav" aria-label="Quick actions">
-  <button data-act="home"><span class="i" aria-hidden="true">🏠</span>Finder</button>
-  <button data-act="search" data-arg=""><span class="i" aria-hidden="true">🔍</span>Search</button>
-  <button class="main" data-act="lead" data-arg="expert"><span class="i" aria-hidden="true">💬</span>Expert</button>
-  <button data-act="compare"><span class="i" aria-hidden="true">⚖️</span>Compare</button>
-  <button data-act="locator" data-arg="distributor"><span class="i" aria-hidden="true">📍</span>Locate</button>
+  <a href="#/"><span class="i" aria-hidden="true">🏠</span>Home</a>
+  <a href="#/finder"><span class="i" aria-hidden="true">🔍</span>Find</a>
+  <a class="main" href="#/advisor"><span class="i" aria-hidden="true">💬</span>AI</a>
+  <a href="#/passport"><span class="i" aria-hidden="true">📘</span>Passport</a>
+  <button data-act="menu"><span class="i" aria-hidden="true">☰</span>More</button>
 </nav>
 <div id="modal-root"></div>
+<div id="demo" hidden role="region" aria-label="Demo controller"></div>
 <div id="toast" role="status" aria-live="polite"></div>
+<div id="tip" hidden></div>
 
-<script>
-'use strict';
-/* =====================================================================
-   GULF PRODUCT & APPLICATION FINDER 2.0 – PROTOTYPE
-   Single-file SPA. Sections: DATA · STATE · ANALYTICS · SEARCH ·
-   RECOMMENDATION ENGINE · COMPARISON · UI RENDERING · NAVIGATION ·
-   LEAD FORM · LOCATOR · DEMO.
-   All product/vehicle/equipment data below is DEMONSTRATION DATA.
-   ===================================================================== */
-
-/* ============================== DATA ==============================
-   PRODUCTION: replace these constants with responses from a product API
-   (see DataService at the end of this section). The shape mirrors the
-   proposed entity model:
-   Product ─ Category · Application(type) · Industry · Segment(Vehicle/Equipment)
-           · Specification · Approval · Operating Condition/Problem (tags)
-           · Benefits · Technical Data · TDS · Lead CTA                     */
-
-const CATEGORIES = {MCO:'Motorcycle Oils',PCMO:'Passenger Car Motor Oils',CVO:'Commercial Vehicle Oils',GEAR:'Gear & Transmission Oils',HYD:'Hydraulic Fluids',AGRI:'Agricultural Lubricants',IND:'Industrial Lubricants',GREASE:'Greases',EV:'EV Fluids'};
-const CAT_COLOR = {MCO:'#d6336c',PCMO:'#12407f',CVO:'#0b2a5b',GEAR:'#5b6676',HYD:'#1e6b45',AGRI:'#2f7d32',IND:'#4a3f8f',GREASE:'#7a5200',EV:'#0a7e8c'};
-
-// Operating conditions and problems share one tag vocabulary so that
-// "condition → product" and "problem → product" use the same relationships.
-const TAGS = {normal:'Normal operation',heavy:'Heavy duty / heavy load',hot:'High temperature',dusty:'Dusty environment',longhours:'Long operating hours',startstop:'Frequent start/stop',longdrain:'Long drain interval',fuel:'Fuel efficiency',wear:'Wear protection',corrosion:'Corrosion protection',hydraulic:'Hydraulic performance'};
-const CONDITIONS = ['normal','heavy','hot','dusty','longhours'];
-const PROBLEMS = [['hot','🌡️','High operating temperature'],['heavy','🏋️','Heavy load'],['dusty','🌫️','Dusty environment'],['startstop','🚦','Frequent start/stop'],['longdrain','⏱️','Long drain interval'],['fuel','⛽','Fuel efficiency'],['wear','🛡️','Wear protection'],['corrosion','💧','Corrosion protection'],['hydraulic','🔧','Hydraulic performance']];
-const SEGMENTS = ['Two-wheelers','Passenger cars','Commercial vehicles','Off-highway & construction','Agriculture','Industrial'];
-
-function P(id,name,category,type,viscosity,segments,industries,specifications,tags,applications,benefits,description,base){
-  return {id,name,category,type,viscosity,segments,industries,specifications,tags,applications,benefits,description,
-    approvals:[],                      // intentionally empty: real OEM approvals come from the Gulf technical database
-    technicalData:{'Grade':viscosity,'Performance level':specifications.join(', '),'Base oil type':base,'Product type':type,'Primary application':applications[0]},
-    tds:'#'};                          // PRODUCTION: URL of the TDS PDF + HTML-rendered TDS fields
-}
-const PRODUCTS = [
- P('pride-4t','Gulf Pride 4T Plus','MCO','Engine oil','10W-30',['Two-wheelers'],['Transport & Fleet'],['API SN','JASO MA2'],['normal','startstop','wear','fuel'],['Commuter motorcycles','4-stroke motorcycle engines with wet clutch'],['Smooth clutch feel in city riding','Protection in stop-go traffic','Supports fuel economy'],'Everyday 4-stroke motorcycle engine oil for commuter bikes.','Mineral / part-synthetic (demo)'),
- P('pride-scooter','Gulf Pride Scooter','MCO','Engine oil','10W-30',['Two-wheelers'],['Transport & Fleet'],['API SL','JASO MB'],['normal','startstop','fuel'],['Automatic scooters','Gearless scooter engines'],['Tuned for scooter CVT engines','Easy starts on short trips','Supports fuel economy'],'Engine oil formulated for automatic scooters.','Mineral / part-synthetic (demo)'),
- P('syntrac-4t','Gulf Syntrac 4T','MCO','Engine oil','10W-40',['Two-wheelers'],['Transport & Fleet'],['API SN','JASO MA2'],['hot','heavy','wear','longdrain'],['Premium and performance motorcycles','High-revving 4-stroke engines'],['Holds viscosity at high temperature','Strong wear protection at high revs','Extended drain capability'],'Synthetic 4-stroke oil for premium and performance motorcycles.','Synthetic (demo)'),
- P('formula-gx','Gulf Formula GX','PCMO','Engine oil','5W-30',['Passenger cars'],['Transport & Fleet'],['API SP','ACEA C3'],['normal','hot','wear','longdrain','startstop'],['Petrol and diesel passenger cars','BS-VI diesel engines with after-treatment'],['Compatible with after-treatment systems','Protection in stop-start driving','Extended drain capability'],'Synthetic engine oil for modern petrol and diesel passenger cars.','Synthetic (demo)'),
- P('ultrasynth-x','Gulf Ultrasynth X','PCMO','Engine oil','0W-20',['Passenger cars'],['Transport & Fleet'],['API SP','ILSAC GF-6'],['fuel','startstop','normal','wear'],['Modern petrol and hybrid passenger cars','BS-VI petrol engines'],['Low-viscosity for fuel efficiency','Fast flow at cold start','Protection for turbo petrol engines'],'Low-viscosity synthetic oil for modern petrol and hybrid cars.','Synthetic (demo)'),
- P('multi-g','Gulf Multi G','PCMO','Engine oil','20W-50',['Passenger cars'],['Transport & Fleet'],['API SL'],['normal','hot','wear'],['Older petrol passenger cars','Higher-mileage engines'],['Thicker film for older engines','Helps control oil consumption','Reliable everyday protection'],'Multigrade engine oil for older and higher-mileage cars.','Mineral (demo)'),
- P('superfleet-supreme','Gulf Superfleet Supreme','CVO','Engine oil','15W-40',['Commercial vehicles','Off-highway & construction'],['Transport & Fleet','Construction','Mining','Power','Material Handling'],['API CK-4','ACEA E9'],['normal','heavy','hot','dusty','longhours','wear'],['BS-VI diesel engines for trucks and buses','Construction and off-highway diesel engines'],['Soot and deposit control under heavy load','Stable viscosity at high temperature','Wear protection in dusty sites','Compatible with after-treatment systems'],'Heavy-duty diesel engine oil for on-road fleets and off-highway equipment.','Premium mineral / part-synthetic (demo)'),
- P('superfleet-synth','Gulf Superfleet Synth','CVO','Engine oil','10W-40',['Commercial vehicles','Off-highway & construction'],['Transport & Fleet','Construction','Mining','Power'],['API CK-4','ACEA E6'],['heavy','hot','longdrain','longhours','fuel'],['Long-haul trucks and buses','High-utilisation diesel engines'],['Extended drain capability','Fuel-economy benefit from lower viscosity','Protection across long duty cycles'],'Synthetic heavy-duty diesel engine oil for long-drain operation.','Synthetic (demo)'),
- P('super-duty','Gulf Super Duty CF-4','CVO','Engine oil','15W-40',['Commercial vehicles','Off-highway & construction','Agriculture'],['Transport & Fleet','Construction','Mining','Agriculture','Power','Material Handling'],['API CI-4'],['normal','heavy','dusty','wear'],['Older diesel trucks and tractors','Gensets and stationary diesel engines'],['Proven protection for older diesel engines','Controls wear in dusty operation','Value option for mixed fleets'],'Diesel engine oil for older commercial vehicles, gensets and equipment.','Mineral (demo)'),
- P('gear-ep','Gulf Gear EP','GEAR','Gear oil','80W-90',['Passenger cars','Commercial vehicles','Off-highway & construction','Agriculture'],['Transport & Fleet','Construction','Mining','Agriculture','Material Handling'],['API GL-5'],['normal','heavy','wear','hot'],['Axles and differentials','Manual gearboxes where GL-5 is specified'],['Extreme-pressure protection for loaded gears','Resists thermal breakdown','Protects against scuffing and wear'],'Extreme-pressure gear oil for axles, differentials and gearboxes.','Mineral (demo)'),
- P('harmony-aw','Gulf Harmony AW','HYD','Hydraulic fluid','ISO VG 68',['Off-highway & construction','Industrial','Agriculture'],['Construction','Mining','Manufacturing','Material Handling','Agriculture','Power'],['ISO VG 68','DIN 51524-2 HLP'],['normal','heavy','hydraulic','wear','corrosion'],['Hydraulic systems in mobile and industrial equipment','Hydraulic presses and power packs'],['Anti-wear protection for pumps','Rust and corrosion protection','Good filterability'],'Anti-wear hydraulic fluid for industrial and mobile hydraulic systems.','Mineral (demo)'),
- P('harmony-hvi','Gulf Harmony HVI','HYD','Hydraulic fluid','ISO VG 46',['Off-highway & construction','Industrial'],['Construction','Mining','Manufacturing','Material Handling'],['ISO VG 46','DIN 51524-3 HVLP'],['hot','hydraulic','longhours','heavy','dusty','wear'],['Mobile hydraulics with wide temperature swings','Excavators, loaders and cranes'],['High viscosity index for hot and cold operation','Consistent hydraulic response','Pump protection over long shifts'],'High-viscosity-index hydraulic fluid for mobile equipment in demanding sites.','Mineral, high VI (demo)'),
- P('utto','Gulf Universal Tractor Transmission Oil','AGRI','Transmission & hydraulic (UTTO)','10W-30',['Agriculture','Off-highway & construction'],['Agriculture','Construction'],['API GL-4'],['normal','heavy','hydraulic','wear'],['Tractor transmissions, hydraulics and wet brakes','Backhoe loader transmissions where UTTO is specified'],['One fluid for transmission, hydraulics and wet brakes','Smooth, quiet wet-brake operation','Gear and pump wear protection'],'Universal tractor transmission oil for transmissions, hydraulics and wet brakes.','Mineral (demo)'),
- P('tractor-engine','Gulf Tractor Engine Oil','AGRI','Engine oil','15W-40',['Agriculture'],['Agriculture'],['API CI-4'],['normal','heavy','dusty','longhours','wear'],['Tractor diesel engines','Harvesters and farm equipment'],['Protection in dusty field conditions','Handles long working days in season','Controls soot and deposits'],'Diesel engine oil for tractors and farm equipment.','Mineral (demo)'),
- P('ep-lubricant','Gulf EP Lubricant HD','IND','Gear oil','ISO VG 220',['Industrial'],['Manufacturing','Mining','Power','Material Handling'],['ISO VG 220','DIN 51517-3 CLP'],['heavy','wear','hot','corrosion','longhours'],['Industrial gearboxes','Enclosed gear drives on conveyors and mills'],['Extreme-pressure protection for loaded gears','Resists micropitting and wear','Rust and corrosion protection'],'Extreme-pressure industrial gear oil for enclosed gear drives.','Mineral (demo)'),
- P('crown-lc','Gulf Crown LC 2','GREASE','Grease','NLGI 2',['Commercial vehicles','Off-highway & construction','Agriculture','Industrial','Two-wheelers'],['Transport & Fleet','Construction','Mining','Agriculture','Manufacturing','Power','Material Handling'],['NLGI 2'],['normal','heavy','hot','dusty','corrosion','wear'],['Wheel bearings, pins and bushes','General industrial and automotive greasing'],['Stays in place under load','Seals out dust and water','Wide temperature range'],'Multipurpose lithium-complex grease for bearings, pins and bushes.','Lithium complex (demo)'),
- P('elec-driveline','Gulf eLEC Driveline Fluid','EV','EV fluid','Low-viscosity e-fluid',['Passenger cars'],['Transport & Fleet'],['Demo e-fluid specification'],['fuel','wear','hot','normal'],['EV reduction gearboxes and e-axles','Electric passenger cars'],['Low viscosity for driveline efficiency','Material and electrical compatibility focus','Gear and bearing protection'],'Concept listing for an EV driveline fluid; scope to be confirmed with Gulf technical team.','Synthetic (demo)')
-];
-const byId = id => PRODUCTS.find(p=>p.id===id);
-
-// ---- Vehicles (Pathway A). PRODUCTION: vehicle master + OEM specification table.
-const VEHICLE_TYPES = [['moto','🏍️','Motorcycle'],['scooter','🛵','Scooter'],['car','🚗','Passenger Car'],['truck','🚛','Truck & Bus'],['tractor','🚜','Tractor']];
-const VEHICLES = [
- {type:'moto',make:'Hero',model:'Splendor Plus',fuels:['Petrol']},
- {type:'moto',make:'Bajaj',model:'Pulsar 150',fuels:['Petrol'],premium:true},
- {type:'moto',make:'Royal Enfield',model:'Classic 350',fuels:['Petrol'],premium:true},
- {type:'scooter',make:'Honda',model:'Activa',fuels:['Petrol']},
- {type:'scooter',make:'TVS',model:'Jupiter',fuels:['Petrol']},
- {type:'car',make:'Tata',model:'Nexon',fuels:['Petrol','Diesel','Electric']},
- {type:'car',make:'Maruti Suzuki',model:'Swift',fuels:['Petrol']},
- {type:'car',make:'Hyundai',model:'Creta',fuels:['Petrol','Diesel']},
- {type:'car',make:'Mahindra',model:'XUV700',fuels:['Petrol','Diesel']},
- {type:'truck',make:'Tata',model:'Signa',fuels:['Diesel']},
- {type:'truck',make:'Ashok Leyland',model:'Ecomet',fuels:['Diesel']},
- {type:'truck',make:'BharatBenz',model:'2823',fuels:['Diesel']},
- {type:'tractor',make:'Mahindra',model:'575 DI',fuels:['Diesel']},
- {type:'tractor',make:'Swaraj',model:'744 FE',fuels:['Diesel']}
-];
-// Returns {need:[productIds]} for a vehicle + fuel + era. Demo rules only.
-function vehicleSystems(v,fuel,era){
-  const bs6 = era==='bs6';
-  if(v.type==='moto') return {'Engine oil':v.premium?['syntrac-4t','pride-4t']:['pride-4t','syntrac-4t'],'Grease':['crown-lc']};
-  if(v.type==='scooter') return {'Engine oil':['pride-scooter']};
-  if(v.type==='car'){
-    if(fuel==='Electric') return {'EV fluid':['elec-driveline']};
-    const eng = fuel==='Diesel' ? (bs6?['formula-gx']:['formula-gx','multi-g']) : (bs6?['ultrasynth-x','formula-gx']:['formula-gx','multi-g']);
-    return {'Engine oil':eng,'Gear oil':['gear-ep']};
-  }
-  if(v.type==='truck') return {'Engine oil':bs6?['superfleet-supreme','superfleet-synth']:['super-duty','superfleet-supreme'],'Gear oil':['gear-ep'],'Grease':['crown-lc']};
-  return {'Engine oil':['tractor-engine','super-duty'],'Transmission & hydraulic (UTTO)':['utto'],'Grease':['crown-lc']};
-}
-
-// ---- Equipment (Pathway B). PRODUCTION: equipment/OEM/model master + lubrication chart.
-const SYS = {
-  mobile:{'Engine oil':['superfleet-supreme','superfleet-synth','super-duty'],'Hydraulic fluid':['harmony-hvi','harmony-aw'],'Gear oil':['gear-ep'],'Grease':['crown-lc']},
-  backhoe:{'Engine oil':['superfleet-supreme','superfleet-synth','super-duty'],'Hydraulic fluid':['harmony-hvi','harmony-aw'],'Gear oil':['gear-ep','utto'],'Grease':['crown-lc']},
-  tractor:{'Engine oil':['tractor-engine','super-duty'],'Transmission & hydraulic (UTTO)':['utto'],'Grease':['crown-lc']},
-  press:{'Hydraulic fluid':['harmony-aw','harmony-hvi'],'Grease':['crown-lc']},
-  gearbox:{'Gear oil':['ep-lubricant'],'Grease':['crown-lc']},
-  genset:{'Engine oil':['superfleet-supreme','super-duty','superfleet-synth']},
-  forklift:{'Engine oil':['super-duty','superfleet-supreme'],'Hydraulic fluid':['harmony-aw','harmony-hvi'],'Gear oil':['gear-ep'],'Grease':['crown-lc']}
-};
-const OTHER = {'Other / not listed':['Generic model']};
-const SECTORS = [['Construction','🏗️'],['Mining','⛏️'],['Agriculture','🌾'],['Manufacturing','🏭'],['Power','⚡'],['Material Handling','📦']];
-const EQUIPMENT = [
- {sector:'Construction',type:'Excavator',icon:'🦾',systems:SYS.mobile,oems:{'Tata Hitachi':['EX 200LC'],'Komatsu':['PC210'],'CAT':['320D'],...OTHER}},
- {sector:'Construction',type:'Backhoe Loader',icon:'🚜',systems:SYS.backhoe,oems:{'JCB':['3DX','4DX'],'CAT':['424'],'Komatsu':['WB93R'],...OTHER}},
- {sector:'Construction',type:'Wheel Loader',icon:'🚧',systems:SYS.mobile,oems:{'CAT':['950'],'JCB':['433'],...OTHER}},
- {sector:'Construction',type:'Crane',icon:'🏗️',systems:SYS.mobile,oems:{'ACE':['FX 150'],'Escorts':['Hydra 14'],...OTHER}},
- {sector:'Construction',type:'Compactor',icon:'🛞',systems:SYS.mobile,oems:{'JCB':['VM117'],'Dynapac':['CA250'],...OTHER}},
- {sector:'Mining',type:'Dump Truck',icon:'🚚',systems:SYS.mobile,oems:{'BEML':['BH50'],'Komatsu':['HD785'],'CAT':['777'],...OTHER}},
- {sector:'Mining',type:'Mining Excavator',icon:'🦾',systems:SYS.mobile,oems:{'Komatsu':['PC1250'],'Tata Hitachi':['EX 1200'],...OTHER}},
- {sector:'Mining',type:'Drill Rig',icon:'🔩',systems:SYS.mobile,oems:{...OTHER}},
- {sector:'Agriculture',type:'Tractor',icon:'🚜',systems:SYS.tractor,oems:{'Mahindra':['575 DI'],'Swaraj':['744 FE'],'John Deere':['5050D'],...OTHER}},
- {sector:'Agriculture',type:'Combine Harvester',icon:'🌾',systems:SYS.tractor,oems:{'Preet':['987'],'John Deere':['W70'],...OTHER}},
- {sector:'Manufacturing',type:'Hydraulic Press',icon:'🗜️',systems:SYS.press,oems:{...OTHER}},
- {sector:'Manufacturing',type:'Industrial Gearbox',icon:'⚙️',systems:SYS.gearbox,oems:{'Elecon':['Helical series'],...OTHER}},
- {sector:'Manufacturing',type:'Injection Moulding Machine',icon:'🏭',systems:SYS.press,oems:{...OTHER}},
- {sector:'Power',type:'Diesel Genset',icon:'🔌',systems:SYS.genset,oems:{'Cummins':['Up to 125 kVA','125–500 kVA','Above 500 kVA'],'Kirloskar':['Up to 125 kVA','125–500 kVA'],...OTHER}},
- {sector:'Material Handling',type:'Forklift',icon:'🏋️',systems:SYS.forklift,oems:{'Godrej':['3 tonne diesel'],'Toyota':['3 tonne diesel'],...OTHER}},
- {sector:'Material Handling',type:'Conveyor Drive',icon:'📦',systems:SYS.gearbox,oems:{...OTHER}}
-];
-// Flat list of equipment models for search
-const EQUIP_MODELS = EQUIPMENT.flatMap(e=>Object.entries(e.oems).flatMap(([oem,ms])=>oem.startsWith('Other')?[]:ms.map(model=>({sector:e.sector,type:e.type,oem,model,systems:e.systems}))));
-const INDUSTRIES = [...SECTORS,['Transport & Fleet','🚛']];
-const FLEET_EQUIP = ['Trucks','Buses','Light commercial vehicles'];
-const APPLICATIONS = [['Engine oil','🛢️','Engine'],['Hydraulic fluid','🔧','Hydraulic system'],['Gear oil','⚙️','Gearbox, axle & gear drives'],['Grease','🧴','Bearings & greasing'],['Transmission & hydraulic (UTTO)','🚜','Tractor transmission & wet brakes'],['EV fluid','🔋','EV driveline']];
-const appLabel = t => (APPLICATIONS.find(a=>a[0]===t)||[0,0,t])[2];
-
-// ---- Locator mock data (Section 13). PRODUCTION: distributor/garage API with geo search.
-const CITIES = {Mumbai:'40',Delhi:'11',Bengaluru:'56',Chennai:'60',Pune:'41',Kolkata:'70',Hyderabad:'50',Ahmedabad:'38'};
-const AREAS = {Mumbai:['Andheri East','Vashi'],Delhi:['Okhla','Karol Bagh'],Bengaluru:['Peenya','Whitefield'],Chennai:['Ambattur','Guindy'],Pune:['Chakan','Hadapsar'],Kolkata:['Howrah','Salt Lake'],Hyderabad:['Balanagar','Uppal'],Ahmedabad:['Naroda','Sarkhej']};
-function locations(kind){
-  return Object.keys(CITIES).flatMap(city=>AREAS[city].map((area,i)=>({city,area,pin:CITIES[city]+'00'+(i+1)+'0',
-    name: kind==='garage' ? `Gulf Garage – ${area}` : `Gulf Authorized Distributor – ${area}`,
-    lines: kind==='garage' ? (i?'Two-wheelers + Cars':'Cars + Commercial vehicles') : (i?'Automotive':'Automotive + Industrial'),
-    hours: i?'Open today · 9:30–19:00':'Open today · 9:00–18:30'})));
-}
-
-// ---- Data access layer. PRODUCTION: swap these for fetch() calls; the UI only uses this object.
-const DataService = {
-  products:()=>PRODUCTS,                       // GET /api/products
-  product:id=>byId(id),                        // GET /api/products/{id}
-  vehicles:()=>VEHICLES, equipment:()=>EQUIPMENT,
-  locations:kind=>locations(kind)              // GET /api/locations?type=&pincode=
-};
-
-/* ============================== STATE ============================== */
-const fresh = () => ({depth:0,view:'home',path:null,step:0,sel:{},labels:{},ctx:null,productId:null,query:'',spec:null,cat:null,locKind:'distributor',locQuery:null});
-let state = fresh();
-let compare = [];             // product ids, max 3 (kept outside history so it survives navigation)
-let demoRunning = false;
-const $ = (s,r=document)=>r.querySelector(s);
-const esc = s => String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const uniq = a => [...new Set(a)];
-const sleep = ms => new Promise(r=>setTimeout(r,ms));
-
-/* ============================ ANALYTICS ============================
-   Mock data layer. PRODUCTION: forward to GA4 / CDP via window.dataLayer. */
-const Analytics = {
-  events:[],
-  track(name,payload={}){ const e={event:name,...payload,ts:new Date().toISOString()}; this.events.push(e); (window.dataLayer=window.dataLayer||[]).push(e); }
-};
-
-/* ============================== SEARCH ==============================
-   Normalised token search across every entity type. "5W30" matches
-   "5W-30", "BS6" matches "BS-VI", "API CK-4" matches "API CK4".        */
-function norm(s){ return String(s).toLowerCase().replace(/bs[\s-]?vi\b/g,'bs6').replace(/[^a-z0-9]+/g,' ').trim(); }
-function matches(text,q){
-  const hay=norm(text), squashed=hay.replace(/ /g,''), toks=norm(q).split(' ').filter(Boolean);
-  if(!toks.length) return false;
-  return toks.every(t=>hay.includes(t)||squashed.includes(t)) || squashed.includes(toks.join(''));
-}
-const productText = p => [p.name,p.viscosity,CATEGORIES[p.category],p.category,p.type,appLabel(p.type),p.segments.join(' '),p.industries.join(' '),allSpecs(p).join(' '),p.applications.join(' '),p.tags.map(t=>TAGS[t]).join(' ')].join(' ');
-function allSpecs(p){ const s=[...p.specifications]; if(/^\d+W/.test(p.viscosity)) s.push('SAE '+p.viscosity); return s; }
-const ALL_SPECS = () => uniq(PRODUCTS.flatMap(allSpecs)).sort();
-const specFamily = s => ['ISO VG','API','ACEA','JASO','ILSAC','DIN','NLGI','SAE'].find(f=>s.startsWith(f))||'Other';
-function search(q){
-  return {
-    equipment: EQUIP_MODELS.filter(e=>matches([e.oem,e.model,e.type,e.sector,'equipment'].join(' '),q)),
-    vehicles: VEHICLES.filter(v=>matches([v.make,v.model,VEHICLE_TYPES.find(t=>t[0]===v.type)[2],v.fuels.join(' ')].join(' '),q)),
-    specs: ALL_SPECS().filter(s=>matches(s,q)),
-    products: PRODUCTS.filter(p=>matches(productText(p),q)),
-    industries: INDUSTRIES.filter(i=>matches(i[0]+' industry equipment',q)),
-    problems: PROBLEMS.filter(p=>matches(p[2],q))
-  };
-}
-
-/* ======================== RECOMMENDATION ENGINE ========================
-   Pure functions, no DOM. Input: a context describing what the user told us.
-   ctx = { source, subject, trail:[labels], systems:{need:[productIds]}, need, conditions:[tagIds] }
-   Output: { primary, alternatives, reasons } for the active need.
-   PRODUCTION: replace scoring with the validated lubrication chart /
-   OEM specification table; keep the same input/output contract.          */
-function recommend(ctx){
-  const ids = (ctx.systems[ctx.need]||[]);
-  const scored = ids.map((id,i)=>{ const p=byId(id); const hit=ctx.conditions.filter(c=>p.tags.includes(c));
-    return {p,hit,score:hit.length*3 + (ids.length-i)*0.5}; }).sort((a,b)=>b.score-a.score);
-  if(!scored.length) return null;
-  const top=scored[0];
-  return {primary:top.p, alternatives:scored.slice(1).map(s=>s.p), reasons:explain(top.p,ctx,top.hit)};
-}
-function explain(p,ctx,hit){
-  const r=[];
-  r.push({ok:true,t:`${p.viscosity} is a suitable grade for ${appLabel(ctx.need).toLowerCase()} use in ${ctx.subject}`});
-  hit.forEach(c=>r.push({ok:true,t:`Formulated for ${TAGS[c].toLowerCase()}`}));
-  ctx.conditions.filter(c=>!hit.includes(c)).forEach(c=>r.push({ok:false,t:`${TAGS[c]} is not this product's primary strength – confirm with a Gulf technical expert`}));
-  r.push({ok:true,t:`Meets the required performance level: ${p.specifications.join(', ')}`});
-  r.push({ok:true,t:`Designed for ${CATEGORIES[p.category].toLowerCase()}: ${p.applications[0]}`});
-  return r;
-}
-// Reverse lookup: which vehicles / equipment lead to this product (entity relationships)
-function compatibility(id){
-  const veh = VEHICLES.filter(v=>v.fuels.some(f=>['bs6','pre'].some(era=>Object.values(vehicleSystems(v,f,era)).some(a=>a.includes(id))))).map(v=>`${v.make} ${v.model}`);
-  const eq = EQUIP_MODELS.filter(e=>Object.values(e.systems).some(a=>a.includes(id))).map(e=>`${e.oem} ${e.model} (${e.type})`);
-  return {veh:uniq(veh),eq:uniq(eq)};
-}
-
-/* ============================ COMPARISON ============================ */
-function toggleCompare(id){
-  if(compare.includes(id)) compare=compare.filter(x=>x!==id);
-  else if(compare.length>=3){ toast('You can compare up to 3 products. Remove one first.'); return; }
-  else { compare.push(id); Analytics.track('product_compared',{product:id,count:compare.length}); }
-  renderTray(); render(false);
-}
-function renderTray(){
-  const t=$('#tray');
-  if(!compare.length||state.view==='compare'){ t.hidden=true; return; }
-  t.hidden=false;
-  t.innerHTML=`<div class="wrap"><strong>Compare (${compare.length}/3)</strong>${compare.map(id=>`<button class="chip" data-act="cmp" data-arg="${id}" aria-label="Remove ${esc(byId(id).name)} from compare">${esc(byId(id).name)} ✕</button>`).join('')}<span style="flex:1"></span><button class="btn sm" data-act="compare">Compare Products</button></div>`;
-}
-
-/* ============================ UI RENDERING ============================ */
-function packSVG(p){
-  return `<svg class="pack" viewBox="0 0 108 150" role="img" aria-label="Product pack placeholder for ${esc(p.name)}"><rect x="30" y="6" width="34" height="18" rx="3" fill="#1c2533"/><rect x="8" y="28" width="92" height="116" rx="9" fill="${CAT_COLOR[p.category]}"/><rect x="8" y="60" width="92" height="50" fill="#fff"/><text x="54" y="80" text-anchor="middle" font-size="11" font-weight="800" fill="#0b2a5b" font-family="Arial">${p.category}</text><text x="54" y="98" text-anchor="middle" font-size="${p.viscosity.length>9?7:11}" font-weight="800" fill="#c9480c" font-family="Arial">${esc(p.viscosity)}</text><rect x="8" y="118" width="92" height="6" fill="#f26522"/></svg>`;
-}
-function productCard(p){
-  const on=compare.includes(p.id);
-  return `<article class="pcard"><div class="img">${packSVG(p)}</div><div class="body">
-    <span class="cat">${CATEGORIES[p.category]}</span><h3>${esc(p.name)}</h3>
-    <div><span class="tag">${esc(p.viscosity)}</span><span class="tag">${esc(p.specifications[0])}</span></div>
-    <p class="small muted" style="margin:0">${esc(p.applications[0])}</p>
-    <div class="acts"><button class="btn sm" data-act="product" data-arg="${p.id}">View Product</button><button class="btn sm sec" data-act="cmp" data-arg="${p.id}" aria-pressed="${on}">${on?'✓ In Compare':'Add to Compare'}</button></div>
-  </div></article>`;
-}
-const DISCLAIMER = `<p class="disclaimer">Prototype demonstration data. Product specifications and approvals should be validated against current Gulf technical documentation before production use.</p>`;
-function crumbs(items){
-  return `<div class="crumbs"><div class="wrap"><button class="link" data-act="home">Home</button>${items.map((c,i)=>`<span class="sep">›</span>${i===items.length-1?`<span aria-current="page">${esc(c)}</span>`:`<span>${esc(c)}</span>`}`).join('')}</div></div>`;
-}
-function searchForm(val,light){
-  return `<form class="searchbar ${light?'light':''}" data-form="search" role="search"><label class="skip" for="q">Search</label><input id="q" name="q" type="search" autocomplete="off" placeholder="Search by vehicle, equipment, product, specification or application" value="${esc(val||'')}"><button type="submit">Search</button></form>`;
-}
-const EXAMPLES=['Tata Nexon','JCB 3DX','BS6 diesel engine','Hydraulic system','API CK-4','Gulf Pride 4T','Gearbox','Construction equipment'];
-function chain(nodes){ return `<div class="chain">${nodes.map((n,i)=>(i?'<span class="arr" aria-hidden="true">→</span>':'')+(n.act?`<button class="node ${n.c||''}" data-act="${n.act}" data-arg="${esc(n.arg||'')}">${esc(n.t)}</button>`:`<span class="node ${n.c||''}">${esc(n.t)}</span>`)).join('')}</div>`; }
-
-// ---------- Screen 1: landing ----------
-function viewHome(){
-  const paths=[['vehicle','🚗','My Vehicle','Vehicle type, make, model and fuel'],['equipment','🚜','My Equipment','Construction, mining, farm and plant'],['industry','🏭','My Industry','Start from your sector and application'],['application','⚙️','My Application','Engine, hydraulics, gears, grease'],['spec','📋','Specification / Approval','API, ACEA, JASO, ISO VG, SAE'],['catalogue','🔍','I Know the Product','Browse the Gulf range']];
-  return `${crumbs(['Product Finder'])}
-  <section class="hero"><div class="wrap">
-    <div class="eyebrow">Product &amp; Application Finder</div>
-    <h1>Find the Right Gulf Lubricant</h1>
-    <p class="lead">Whether you know your vehicle, equipment, application, industry or specification, we'll help you find the right Gulf product.</p>
-    <div class="hero-actions"><button class="btn" data-act="scroll" data-arg="paths">Start Finding</button><button class="btn ghost" data-act="catalogue">Search Products</button><button class="btn ghost" data-act="demo">▶ Try a Demo Journey</button></div>
-    ${searchForm('')}
-    <div class="examples"><span>Try:</span>${EXAMPLES.map(e=>`<button class="chip" data-act="search" data-arg="${esc(e)}">${esc(e)}</button>`).join('')}</div>
-  </div></section>
-  <section class="band" id="paths"><div class="wrap">
-    <div class="eyebrow">What are you looking for?</div><h2>How would you like to search?</h2>
-    <div class="grid g3">${paths.map(p=>`<button class="opt path-card" data-act="${p[0]==='spec'||p[0]==='catalogue'?p[0]:'path'}" data-arg="${p[0]}"><span class="ico" aria-hidden="true">${p[1]}</span><strong>${p[2]}</strong><span class="sub">${p[3]}</span></button>`).join('')}</div>
-    <div class="grid g2" style="margin-top:18px">
-      <button class="opt" data-act="path" data-arg="problem"><span class="ico" aria-hidden="true">🛠️</span><strong>What are you trying to solve?</strong><span class="sub">High temperature, heavy load, long drain, wear and more</span></button>
-      <button class="opt" data-act="locator" data-arg="distributor"><span class="ico" aria-hidden="true">📍</span><strong>Find a Distributor or Gulf Garage</strong><span class="sub">Search by pincode or city</span></button>
-    </div>
-  </div></section>
-  <section class="band grey"><div class="wrap">
-    <div class="eyebrow">One database, many ways in</div><h2>Explore by</h2>
-    <p class="muted" style="max-width:760px">Every route below reads the same product, equipment and specification data. On the live site each one becomes an indexable page, so the same Gulf product can be found from many searches.</p>
-    <div class="examples" style="margin-bottom:28px">
-      ${[['Vehicle','path','vehicle'],['Equipment','path','equipment'],['OEM','search','JCB'],['Industry','path','industry'],['Application','path','application'],['Specification','spec',''],['Problem','path','problem'],['Product','catalogue','']].map(x=>`<button class="chip" data-act="${x[1]}" data-arg="${x[2]}">${x[0]}</button>`).join('')}
-    </div>
-    <div class="card"><h3>Example: how JCB 3DX connects</h3>
-      ${chain([{t:'JCB',act:'search',arg:'JCB'},{t:'3DX',act:'search',arg:'JCB 3DX'},{t:'Construction',act:'search',arg:'Construction'},{t:'Backhoe Loader',act:'search',arg:'Backhoe Loader'},{t:'Engine Oil',c:'e'},{t:'Hydraulic Fluid',c:'e'},{t:'Gulf Product',c:'p',act:'product',arg:'superfleet-supreme'},{t:'Specification',c:'e',act:'specpick',arg:'API CK-4'},{t:'TDS',c:'e',act:'doc',arg:'tds|superfleet-supreme'},{t:'FAQ',c:'e'}])}
-      <p class="small muted" style="margin:12px 0 0">Each node is an entity. Linking them is what makes the site readable to search engines and AI answer engines.</p></div>
-    ${DISCLAIMER}
-  </div></section>`;
-}
-
-// ---------- Screens 2–5, 7: guided journeys ----------
-const condOpts = () => CONDITIONS.map(c=>({v:c,label:TAGS[c]}));
-const curVehicle = s => VEHICLES.find(v=>v.type===s.vtype&&v.make===s.make&&v.model===s.model);
-const curEquip = s => EQUIPMENT.find(e=>e.sector===s.sector&&e.type===s.etype);
-const PATHS = {
-  vehicle:{title:'My Vehicle',event:'vehicle_selected',steps:[
-    {key:'vtype',q:'What type of vehicle do you have?',opts:()=>VEHICLE_TYPES.map(t=>({v:t[0],icon:t[1],label:t[2]}))},
-    {key:'make',q:'Who is the manufacturer?',opts:s=>uniq(VEHICLES.filter(v=>v.type===s.vtype).map(v=>v.make)).map(m=>({v:m,label:m}))},
-    {key:'model',q:'Which model?',opts:s=>VEHICLES.filter(v=>v.type===s.vtype&&v.make===s.make).map(v=>({v:v.model,label:v.model}))},
-    {key:'fuel',q:'Year and fuel',opts:s=>curVehicle(s).fuels.flatMap(f=>f==='Electric'?[{v:'Electric|bs6',label:'Electric',sub:'Battery electric'}]:[{v:f+'|bs6',label:f,sub:'2020 onwards (BS-VI era)'},{v:f+'|pre',label:f,sub:'Before 2020'}])},
-    {key:'need',q:'What do you need a lubricant for?',opts:s=>{const [f,e]=s.fuel.split('|');return Object.keys(vehicleSystems(curVehicle(s),f,e)).map(n=>({v:n,label:appLabel(n),sub:n}));}}
-  ],build:(s,l)=>{const v=curVehicle(s),[f,e]=s.fuel.split('|');return {source:'vehicle',subject:`${v.make} ${v.model}`,trail:[l.vtype,v.make,v.model,`${f}${f==='Electric'?'':e==='bs6'?' · BS-VI era':' · pre-2020'}`],systems:vehicleSystems(v,f,e),need:s.need,conditions:[]};}},
-  equipment:{title:'My Equipment',event:'equipment_selected',steps:[
-    {key:'sector',q:'What type of equipment?',opts:()=>SECTORS.map(x=>({v:x[0],icon:x[1],label:x[0]}))},
-    {key:'etype',q:'Which equipment?',opts:s=>EQUIPMENT.filter(e=>e.sector===s.sector).map(e=>({v:e.type,icon:e.icon,label:e.type}))},
-    {key:'oem',q:'Who is the OEM / manufacturer?',opts:s=>Object.keys(curEquip(s).oems).map(o=>({v:o,label:o}))},
-    {key:'emodel',q:'Which model?',opts:s=>curEquip(s).oems[s.oem].map(m=>({v:m,label:m}))},
-    {key:'conds',multi:true,q:'What are the operating conditions?',hint:'Select all that apply.',opts:condOpts}
-  ],build:s=>{const e=curEquip(s),other=s.oem.startsWith('Other');return {source:'equipment',subject:other?e.type:`${s.oem} ${s.emodel}`,trail:[s.sector,e.type,other?'Other OEM':s.oem,other?'Generic model':s.emodel],systems:e.systems,need:Object.keys(e.systems)[0],conditions:s.conds||[]};}},
-  industry:{title:'My Industry',event:'industry_selected',steps:[
-    {key:'industry',q:'Which industry are you in?',opts:()=>INDUSTRIES.map(x=>({v:x[0],icon:x[1],label:x[0]}))},
-    {key:'iapp',q:'Which application?',opts:s=>APPLICATIONS.filter(a=>PRODUCTS.some(p=>p.type===a[0]&&p.industries.includes(s.industry))).map(a=>({v:a[0],icon:a[1],label:a[2]}))},
-    {key:'iequip',q:'Which equipment?',opts:s=>(s.industry==='Transport & Fleet'?FLEET_EQUIP:EQUIPMENT.filter(e=>e.sector===s.industry&&e.systems[s.iapp]).map(e=>e.type)).concat(['Other / mixed fleet']).map(x=>({v:x,label:x}))},
-    {key:'conds',multi:true,q:'What is your requirement?',hint:'Select the operating conditions that apply.',opts:condOpts}
-  ],build:s=>({source:'industry',subject:s.iequip.startsWith('Other')?`${s.industry} equipment`:`${s.iequip} (${s.industry})`,trail:[s.industry,appLabel(s.iapp),s.iequip],systems:{[s.iapp]:PRODUCTS.filter(p=>p.type===s.iapp&&p.industries.includes(s.industry)).map(p=>p.id)},need:s.iapp,conditions:s.conds||[]})},
-  application:{title:'My Application',event:'application_selected',steps:[
-    {key:'app',q:'What needs lubricating?',opts:()=>APPLICATIONS.map(a=>({v:a[0],icon:a[1],label:a[2]}))},
-    {key:'segment',q:'Where is it used?',opts:s=>SEGMENTS.filter(g=>PRODUCTS.some(p=>p.type===s.app&&p.segments.includes(g))).map(g=>({v:g,label:g}))},
-    {key:'conds',multi:true,q:'What are the operating conditions?',hint:'Select all that apply.',opts:condOpts}
-  ],build:s=>({source:'application',subject:s.segment.toLowerCase(),trail:[appLabel(s.app),s.segment],systems:{[s.app]:PRODUCTS.filter(p=>p.type===s.app&&p.segments.includes(s.segment)).map(p=>p.id)},need:s.app,conditions:s.conds||[]})},
-  problem:{title:'What are you trying to solve?',event:'application_selected',steps:[
-    {key:'problem',q:'What are you trying to solve?',opts:()=>PROBLEMS.map(p=>({v:p[0],icon:p[1],label:p[2]}))},
-    {key:'segment',q:'Where does it occur?',opts:s=>SEGMENTS.filter(g=>PRODUCTS.some(p=>p.tags.includes(s.problem)&&p.segments.includes(g))).map(g=>({v:g,label:g}))},
-    {key:'papp',q:'In which system?',opts:s=>APPLICATIONS.filter(a=>PRODUCTS.some(p=>p.type===a[0]&&p.tags.includes(s.problem)&&p.segments.includes(s.segment))).map(a=>({v:a[0],icon:a[1],label:a[2]}))}
-  ],build:(s,l)=>({source:'problem',subject:s.segment.toLowerCase(),trail:[l.problem,s.segment,appLabel(s.papp)],systems:{[s.papp]:PRODUCTS.filter(p=>p.type===s.papp&&p.tags.includes(s.problem)&&p.segments.includes(s.segment)).map(p=>p.id)},need:s.papp,conditions:[s.problem]})}
-};
-function viewWizard(){
-  const path=PATHS[state.path], st=path.steps[state.step], opts=st.opts(state.sel), chosen=state.sel[st.key]||[];
-  const trail=path.steps.slice(0,state.step).map(x=>state.labels[x.key]).filter(Boolean);
-  return `${crumbs(['Product Finder',path.title])}
-  <section class="band"><div class="wrap">
-    <div class="eyebrow">${esc(path.title)} · Step ${state.step+1} of ${path.steps.length}</div>
-    <ol class="steps" aria-hidden="true">${path.steps.map((x,i)=>`<li class="${i<state.step?'done':i===state.step?'cur':''}"></li>`).join('')}</ol>
-    ${trail.length?`<div class="trail"><span class="muted">Your selection:</span>${trail.map(t=>`<span class="tag">${esc(t)}</span>`).join('<span aria-hidden="true">→</span>')}</div>`:''}
-    <h1 id="view-title" tabindex="-1" style="font-size:clamp(24px,3vw,34px)">${esc(st.q)}</h1>
-    ${st.hint?`<p class="muted">${esc(st.hint)}</p>`:''}
-    <div class="grid g4" role="group" aria-label="${esc(st.q)}">${opts.map((o,i)=>`<button class="opt ${st.multi&&chosen.includes(o.v)?'sel':''}" data-act="pick" data-arg="${i}" ${st.multi?`aria-pressed="${chosen.includes(o.v)}"`:''}>${o.icon?`<span class="ico" aria-hidden="true">${o.icon}</span>`:''}<strong>${esc(o.label)}</strong>${o.sub?`<span class="sub">${esc(o.sub)}</span>`:''}</button>`).join('')}</div>
-    <div class="wiz-actions">
-      ${st.multi?`<button class="btn" data-act="continue">Show Recommendation</button>`:''}
-      <button class="btn sec" data-act="back">← Back</button>
-      <button class="link" data-act="home">Reset Finder</button>
-    </div>
-    ${DISCLAIMER}
-  </div></section>`;
-}
-
-// ---------- Screen 9: recommendation ----------
-function viewResult(){
-  const ctx=state.ctx, rec=recommend(ctx), needs=Object.keys(ctx.systems);
-  const head=`${crumbs(['Product Finder','Recommendation'])}<section class="band"><div class="wrap">
-    <div class="eyebrow">Recommended Gulf lubricant</div>
-    <h1 id="view-title" tabindex="-1" style="font-size:clamp(24px,3vw,34px)">Recommended for ${esc(ctx.subject)}</h1>`;
-  if(!rec) return head+`<div class="card"><h3>No direct match in the demo data</h3><p>A Gulf technical expert can recommend the right product for this requirement.</p><button class="btn" data-act="lead" data-arg="expert">Talk to a Technical Expert</button> <button class="btn sec" data-act="back">← Back</button></div></div></section>`;
-  const p=rec.primary, others=needs.filter(n=>n!==ctx.need);
-  return head+`
-    ${needs.length>1?`<div class="tabs" role="group" aria-label="What are you looking for?"><span class="muted" style="align-self:center;margin-right:6px">What are you looking for?</span>${needs.map(n=>`<button class="chip ${n===ctx.need?'on':''}" data-act="need" data-arg="${esc(n)}" aria-pressed="${n===ctx.need}">${esc(n)}</button>`).join('')}</div>`:''}
-    <article class="reco">
-      <div>${packSVG(p)}</div>
-      <div>
-        <span class="tag" style="background:var(--orange);color:#1a0d05">Recommended for your application</span>
-        <h2 style="margin-top:8px">${esc(p.name)}</h2>
-        <p>${esc(p.description)}</p>
-        <dl class="kv"><div><dt>Category</dt><dd>${CATEGORIES[p.category]}</dd></div><div><dt>Viscosity / grade</dt><dd>${esc(p.viscosity)}</dd></div><div><dt>Application</dt><dd>${esc(appLabel(ctx.need))}</dd></div><div><dt>Specifications <span class="demo-badge">demo</span></dt><dd>${esc(p.specifications.join(', '))}</dd></div><div><dt>Compatibility</dt><dd>${esc(ctx.subject)}</dd></div><div><dt>Suggested use</dt><dd>${esc(p.applications[0])}</dd></div></dl>
-        <div class="cta-row"><button class="btn" data-act="lead" data-arg="expert">Talk to a Gulf Technical Expert</button><button class="btn sec" data-act="product" data-arg="${p.id}">View Product</button><button class="btn sec" data-act="doc" data-arg="specs|${p.id}">View Technical Details</button><button class="btn sec" data-act="locator" data-arg="distributor">Find a Distributor</button></div>
-      </div>
-    </article>
-    <h2 style="margin-top:40px">Why this product?</h2>
-    <div class="logic">
-      <div class="card"><h4>Your selection</h4>${uniq(ctx.trail.concat(ctx.conditions.map(c=>TAGS[c]))).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
-      <div class="arr" aria-hidden="true">→</div>
-      <div class="card" style="border-top-color:var(--orange)"><h4>Recommendation</h4><strong style="color:var(--blue);font-size:18px">${esc(p.name)}</strong><br><span class="muted">${esc(p.viscosity)} · ${esc(ctx.need)}</span></div>
-      <div class="arr" aria-hidden="true">→</div>
-      <div class="card"><h4>Why?</h4><ul class="why">${rec.reasons.map(r=>`<li class="${r.ok?'':'warn'}">${esc(r.t)}</li>`).join('')}</ul></div>
-    </div>
-    <h3 style="margin-top:36px">Key benefits</h3>
-    <div class="grid g4">${p.benefits.map(b=>`<div class="card"><strong>${esc(b)}</strong></div>`).join('')}</div>
-    ${rec.alternatives.length?`<h3 style="margin-top:36px">Alternative Gulf products for this application</h3><div class="grid g3 products">${rec.alternatives.map(productCard).join('')}</div>`:''}
-    ${others.length?`<h3 style="margin-top:36px">Complete lubrication for ${esc(ctx.subject)}</h3><div class="grid g3">${others.map(n=>{const q=byId(ctx.systems[n][0]);return `<button class="opt" data-act="need" data-arg="${esc(n)}"><span class="sub">${esc(n)}</span><strong>${esc(q.name)}</strong><span class="sub">${esc(q.viscosity)} · see why</span></button>`;}).join('')}</div>`:''}
-    <div class="card" style="margin-top:36px"><h3>How this recommendation connects</h3>
-      ${chain([...ctx.trail.map(t=>({t})),{t:ctx.need,c:'e'},{t:p.name,c:'p',act:'product',arg:p.id},{t:p.specifications[0],c:'e',act:'specpick',arg:p.specifications[0]},{t:'TDS',c:'e',act:'doc',arg:'tds|'+p.id},{t:'Talk to expert',c:'e',act:'lead',arg:'expert'}])}
-      <p class="small muted" style="margin:12px 0 0">Industry → Application → Equipment → OEM / Model → Conditions → Specification → Product → Evidence → CTA.</p></div>
-    <div class="cta-row" style="margin-top:28px"><button class="btn" data-act="lead" data-arg="quote">Request a Quote</button><button class="btn sec" data-act="lead" data-arg="assessment">Get a Lubrication Assessment</button><button class="btn sec" data-act="back">← Back</button><button class="link" data-act="home">Reset Finder</button></div>
-    ${DISCLAIMER}
-  </div></section>`;
-}
-
-// ---------- Screen 10: product details ----------
-function viewProduct(){
-  const p=byId(state.productId), c=compatibility(p.id), on=compare.includes(p.id);
-  const related=PRODUCTS.filter(x=>x.id!==p.id&&(x.category===p.category||x.type===p.type)).slice(0,3);
-  $('#ld-product').textContent=JSON.stringify({'@context':'https://schema.org','@type':'Product',name:p.name,category:CATEGORIES[p.category],description:p.description,brand:{'@type':'Brand',name:'Gulf'},additionalProperty:Object.entries(p.technicalData).map(([name,value])=>({'@type':'PropertyValue',name,value}))});
-  const compat=[...c.veh,...c.eq];
-  return `${crumbs(['Product Finder',CATEGORIES[p.category],p.name])}
-  <section class="band"><div class="wrap">
-    <div class="phead"><div>${packSVG(p)}</div><div>
-      <div class="eyebrow">${CATEGORIES[p.category]}</div>
-      <h1 id="view-title" tabindex="-1">${esc(p.name)}</h1>
-      <p class="muted" style="margin-bottom:6px">Recommended for</p>
-      <div>${[...p.segments,p.viscosity,...p.tags.slice(0,4).map(t=>TAGS[t])].map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
-      <div class="cta-row"><button class="btn" data-act="lead" data-arg="expert">Talk to a Technical Expert</button><button class="btn sec" data-act="cmp" data-arg="${p.id}" aria-pressed="${on}">${on?'✓ In Compare':'Add to Compare'}</button><button class="btn sec" data-act="locator" data-arg="distributor">Find a Distributor</button><button class="btn sec" data-act="back">← Back</button></div>
-    </div></div>
-  </div></section>
-  <section class="band grey"><div class="wrap"><div class="grid g2">
-    <div class="card"><h2>Product Overview</h2><p>${esc(p.description)}</p><h3>Applications</h3><ul>${p.applications.map(a=>`<li>${esc(a)}</li>`).join('')}</ul></div>
-    <div class="card"><h2>Specifications <span class="demo-badge">demo</span></h2><div>${allSpecs(p).map(s=>`<button class="chip" style="margin:0 6px 6px 0" data-act="specpick" data-arg="${esc(s)}">${esc(s)}</button>`).join('')}</div>
-      <h3 style="margin-top:18px">OEM Approvals</h3><p class="small muted">OEM approvals are deliberately not shown in this prototype. In production this block lists verified approvals from the Gulf technical database, each linked to its OEM page.</p><button class="btn sm sec" data-act="doc" data-arg="approvals|${p.id}">View Approvals</button></div>
-  </div></div></section>
-  <section class="band"><div class="wrap">
-    <h2>Technical Data <span class="demo-badge">prototype data</span></h2>
-    <div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Property</th><th scope="col">Value</th></tr></thead><tbody>${Object.entries(p.technicalData).map(([k,v])=>`<tr><th scope="row">${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}</tbody></table></div>
-    <p class="small muted" style="margin-top:8px">Rendered as HTML so that search engines and AI answer engines can read it. The PDF remains available below.</p>
-    <h2 style="margin-top:40px">Why Gulf recommends this</h2>
-    <div class="grid g4">${p.benefits.map(b=>`<div class="card"><strong>${esc(b)}</strong></div>`).join('')}</div>
-    <h2 style="margin-top:40px">Compatible Vehicles / Equipment <span class="demo-badge">demo</span></h2>
-    <div class="field" style="max-width:420px"><label for="cf">Filter compatibility</label><input id="cf" type="search" placeholder="e.g. JCB, Tata, Excavator" data-input="compat"></div>
-    <div id="compat">${compat.map(x=>`<span class="tag" data-c="${esc(x.toLowerCase())}">${esc(x)}</span>`).join('')||'<span class="muted">Compatibility is application-based for this product. Talk to a technical expert.</span>'}</div>
-    <h2 style="margin-top:40px">Technical Documents</h2>
-    <div class="cta-row"><button class="btn sec" data-act="doc" data-arg="tds|${p.id}">Download TDS</button><button class="btn sec" data-act="doc" data-arg="specs|${p.id}">View Specifications</button><button class="btn sec" data-act="doc" data-arg="approvals|${p.id}">View Approvals</button></div>
-    <h2 style="margin-top:40px">Frequently asked questions</h2>
-    <details class="card" style="margin-bottom:10px"><summary><strong>What is ${esc(p.name)} used for?</strong></summary><p style="margin-top:10px">${esc(p.description)} Typical use: ${esc(p.applications.join('; ').toLowerCase())}.</p></details>
-    <details class="card"><summary><strong>Which specifications does ${esc(p.name)} meet?</strong></summary><p style="margin-top:10px">Demo data lists ${esc(p.specifications.join(', '))}. Always confirm against the current Gulf TDS.</p></details>
-    ${related.length?`<h2 style="margin-top:40px">Related Products</h2><div class="grid g3 products">${related.map(productCard).join('')}</div>`:''}
-    <div class="cta-row" style="margin-top:28px"><button class="btn" data-act="lead" data-arg="recommendation">Get a Gulf Recommendation</button><button class="btn sec" data-act="lead" data-arg="quote">Request a Quote</button></div>
-    ${DISCLAIMER}
-  </div></section>`;
-}
-
-// ---------- Pathway F: catalogue with filters ----------
-function viewCatalogue(){
-  const list=PRODUCTS.filter(p=>!state.cat||p.category===state.cat);
-  return `${crumbs(['Product Finder','Products'])}<section class="band"><div class="wrap">
-    <div class="eyebrow">I know the product</div><h1 id="view-title" tabindex="-1" style="font-size:clamp(24px,3vw,34px)">Gulf product range</h1>
-    <div class="tabs" role="group" aria-label="Filter by category"><button class="chip ${!state.cat?'on':''}" data-act="cat" data-arg="">All (${PRODUCTS.length})</button>${Object.keys(CATEGORIES).map(c=>`<button class="chip ${state.cat===c?'on':''}" data-act="cat" data-arg="${c}" aria-pressed="${state.cat===c}">${CATEGORIES[c]}</button>`).join('')}</div>
-    <div class="grid g3 products">${list.map(productCard).join('')}</div>
-    <div class="wiz-actions"><button class="btn sec" data-act="back">← Back</button><button class="link" data-act="home">Reset Finder</button></div>${DISCLAIMER}
-  </div></section>`;
-}
-
-// ---------- Screen 6: specification ----------
-function viewSpec(){
-  const fams=uniq(ALL_SPECS().map(specFamily)), list=state.spec?PRODUCTS.filter(p=>allSpecs(p).some(s=>matches(s,state.spec))):[];
-  return `${crumbs(['Product Finder','Specification'])}<section class="band"><div class="wrap">
-    <div class="eyebrow">I know my specification</div><h1 id="view-title" tabindex="-1" style="font-size:clamp(24px,3vw,34px)">Find products by specification or approval</h1>
-    <form class="searchbar light" data-form="spec" style="margin-bottom:22px"><label class="skip" for="sq">Specification</label><input id="sq" name="q" list="speclist" placeholder="Type a specification, e.g. API CK-4, ACEA C3, ISO VG 68, 15W-40" value="${esc(state.spec||'')}"><datalist id="speclist">${ALL_SPECS().map(s=>`<option value="${esc(s)}">`).join('')}</datalist><button type="submit">Find Products</button></form>
-    ${fams.map(f=>`<div style="margin-bottom:12px"><strong style="display:inline-block;min-width:80px;color:var(--blue)">${f}</strong> ${ALL_SPECS().filter(s=>specFamily(s)===f).map(s=>`<button class="chip ${state.spec===s?'on':''}" style="margin:0 6px 6px 0" data-act="specpick" data-arg="${esc(s)}">${esc(s)}</button>`).join('')}</div>`).join('')}
-    <div style="margin-bottom:12px"><strong style="display:inline-block;min-width:80px;color:var(--blue)">OEM</strong> <button class="chip" data-act="lead" data-arg="expert">Equipment manufacturer requirement → ask a Gulf expert</button></div>
-    ${state.spec?`<h2 style="margin-top:30px">Products matching your specification: ${esc(state.spec)}</h2>${list.length?`<div class="grid g3 products">${list.map(productCard).join('')}</div>`:`<div class="card"><p>No demo product lists “${esc(state.spec)}”. A Gulf technical expert can confirm the right product.</p><button class="btn" data-act="lead" data-arg="expert">Talk to a Technical Expert</button></div>`}`:'<p class="muted">Select or type a specification to see compatible Gulf products.</p>'}
-    <div class="wiz-actions"><button class="btn sec" data-act="back">← Back</button><button class="link" data-act="home">Reset Finder</button></div>${DISCLAIMER}
-  </div></section>`;
-}
-
-// ---------- Screen 8: search results ----------
-function searchResultsHTML(q){
-  if(!q.trim()) return `<p class="muted">Try one of these:</p><div class="examples">${EXAMPLES.map(e=>`<button class="chip" data-act="search" data-arg="${esc(e)}">${esc(e)}</button>`).join('')}</div>
-    <h3 style="margin-top:28px">Browse by OEM</h3><div class="examples">${uniq([...EQUIP_MODELS.map(e=>e.oem),...VEHICLES.map(v=>v.make)]).sort().map(o=>`<button class="chip" data-act="search" data-arg="${esc(o)}">${esc(o)}</button>`).join('')}</div>`;
-  const r=search(q), n=r.equipment.length+r.vehicles.length+r.specs.length+r.products.length+r.industries.length+r.problems.length;
-  if(!n) return `<div class="card"><h3>No matches for “${esc(q)}”</h3><p>Check the spelling, try a broader term, or let a Gulf expert find the right product for you.</p><button class="btn" data-act="lead" data-arg="recommendation">Get a Gulf Recommendation</button></div>`;
-  let h=`<p class="muted" aria-live="polite">${n} result${n>1?'s':''} for “${esc(q)}”</p>`;
-  if(r.equipment.length) h+=`<h2>Matching equipment</h2><div class="grid g3">${r.equipment.slice(0,9).map(e=>{const i=EQUIP_MODELS.indexOf(e);return `<div class="card"><h3>${esc(e.oem)} ${esc(e.model)}</h3><p class="small muted">${esc(e.type)} · ${esc(e.sector)}</p><p style="margin-bottom:8px"><strong>What are you looking for?</strong></p>${Object.keys(e.systems).map(nd=>`<button class="chip" style="margin:0 6px 6px 0" data-act="equiphit" data-arg="${i}|${esc(nd)}">${esc(nd)}</button>`).join('')}</div>`;}).join('')}</div>`;
-  if(r.vehicles.length) h+=`<h2 style="margin-top:30px">Matching vehicles</h2><div class="grid g4">${r.vehicles.map(v=>`<button class="opt" data-act="vehhit" data-arg="${VEHICLES.indexOf(v)}"><strong>${esc(v.make)} ${esc(v.model)}</strong><span class="sub">${VEHICLE_TYPES.find(t=>t[0]===v.type)[2]} · choose fuel →</span></button>`).join('')}</div>`;
-  if(r.specs.length) h+=`<h2 style="margin-top:30px">Matching specifications</h2><div>${r.specs.map(s=>`<button class="chip" style="margin:0 6px 6px 0" data-act="specpick" data-arg="${esc(s)}">${esc(s)} → compatible products</button>`).join('')}</div>`;
-  if(r.industries.length||r.problems.length) h+=`<h2 style="margin-top:30px">Matching industries and requirements</h2><div>${r.industries.map(i=>`<button class="chip" style="margin:0 6px 6px 0" data-act="indhit" data-arg="${esc(i[0])}">${i[1]} ${esc(i[0])}</button>`).join('')}${r.problems.map(p=>`<button class="chip" style="margin:0 6px 6px 0" data-act="probhit" data-arg="${p[0]}">${p[1]} ${esc(p[2])}</button>`).join('')}</div>`;
-  if(r.products.length) h+=`<h2 style="margin-top:30px">Matching products (${r.products.length})</h2><div class="grid g3 products">${r.products.map(productCard).join('')}</div>`;
-  return h;
-}
-function viewSearch(){
-  return `${crumbs(['Product Finder','Search'])}<section class="band"><div class="wrap">
-    <div class="eyebrow">Smart search</div><h1 id="view-title" tabindex="-1" style="font-size:clamp(24px,3vw,34px)">Search the Finder</h1>
-    ${searchForm(state.query,true)}
-    <div id="sr" style="margin-top:24px">${searchResultsHTML(state.query)}</div>
-    <div class="wiz-actions"><button class="btn sec" data-act="back">← Back</button><button class="link" data-act="home">Reset Finder</button></div>${DISCLAIMER}
-  </div></section>`;
-}
-
-// ---------- Screen 11: compare ----------
-function viewCompare(){
-  const ps=compare.map(byId);
-  const rows=[['Category',p=>CATEGORIES[p.category]],['Viscosity / grade',p=>p.viscosity],['Application',p=>p.applications.join('; ')],['Specifications',p=>p.specifications.join(', ')],['Approvals',()=>'Shown from Gulf technical database in production'],['Recommended use',p=>p.segments.join(', ')],['Suited conditions',p=>p.tags.map(t=>TAGS[t]).join(', ')],['Key benefits',p=>p.benefits.join('; ')]];
-  return `${crumbs(['Product Finder','Compare'])}<section class="band"><div class="wrap">
-    <div class="eyebrow">Compare products</div><h1 id="view-title" tabindex="-1" style="font-size:clamp(24px,3vw,34px)">Product comparison</h1>
-    ${ps.length<2?`<div class="card"><p>Select at least two products (up to three) with “Add to Compare”.${ps.length?` Currently selected: <strong>${esc(ps[0].name)}</strong>.`:''}</p><button class="btn" data-act="catalogue">Browse Products</button></div>`:
-    `<div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Product</th>${ps.map(p=>`<th scope="col">${esc(p.name)}</th>`).join('')}</tr></thead><tbody>
-      ${rows.map(r=>`<tr><th scope="row">${r[0]}</th>${ps.map(p=>`<td>${esc(r[1](p))}</td>`).join('')}</tr>`).join('')}
-      <tr><th scope="row">Actions</th>${ps.map(p=>`<td><button class="btn sm" data-act="product" data-arg="${p.id}">View Product</button> <button class="link" data-act="cmp" data-arg="${p.id}">Remove</button></td>`).join('')}</tr></tbody></table></div>
-      <div class="cta-row"><button class="btn" data-act="lead" data-arg="expert">Ask an Expert Which Is Right</button><button class="btn sec" data-act="clearcmp">Clear Comparison</button></div>`}
-    <div class="wiz-actions"><button class="btn sec" data-act="back">← Back</button></div>${DISCLAIMER}
-  </div></section>`;
-}
-
-// ---------- Screens 13–14: distributor and garage finder ----------
-function viewLocator(){
-  const kind=state.locKind, label=kind==='garage'?'Gulf Garage':'Distributor', q=state.locQuery;
-  let res=[],note='';
-  if(q){
-    const all=DataService.locations(kind), city=(q.city||'').toLowerCase(), pin=q.pin||'';
-    res=all.filter(l=>(city&&l.city.toLowerCase().includes(city))||(pin&&l.pin.slice(0,2)===pin.slice(0,2)));
-    if(!res.length){ res=all.slice(0,4); note='No exact match in the demo data. Showing sample locations.'; }
-  }
-  return `${crumbs(['Product Finder',kind==='garage'?'Find a Gulf Garage':'Find a Distributor'])}<section class="band"><div class="wrap">
-    <div class="eyebrow">Near you</div><h1 id="view-title" tabindex="-1" style="font-size:clamp(24px,3vw,34px)">Find a ${label} Near You</h1>
-    <div class="tabs" role="group" aria-label="Location type"><button class="chip ${kind==='distributor'?'on':''}" data-act="locator" data-arg="distributor" aria-pressed="${kind==='distributor'}">Find a Distributor</button><button class="chip ${kind==='garage'?'on':''}" data-act="locator" data-arg="garage" aria-pressed="${kind==='garage'}">Find a Gulf Garage</button></div>
-    <form class="loc-form card" data-form="loc" novalidate>
-      <div class="field"><label for="pin">Pincode</label><input id="pin" name="pin" inputmode="numeric" maxlength="6" placeholder="e.g. 400093" value="${esc(q?q.pin:'')}"></div>
-      <div class="field"><label for="city">City</label><input id="city" name="city" list="citylist" placeholder="e.g. Mumbai" value="${esc(q?q.city:'')}"><datalist id="citylist">${Object.keys(CITIES).map(c=>`<option value="${c}">`).join('')}</datalist></div>
-      <button class="btn" type="submit">Search</button>
-    </form>
-    <p class="err" id="loc-err" role="alert" style="color:#b3261e"></p>
-    ${q?`<h2 style="margin-top:20px">${res.length} ${label.toLowerCase()} location${res.length>1?'s':''} <span class="demo-badge">demo</span></h2>${note?`<p class="muted">${note}</p>`:''}
-      <div class="grid g3">${res.map(l=>`<article class="card"><h3>${esc(l.name)}</h3><p style="margin-bottom:4px">${esc(l.area)}, ${esc(l.city)} – ${l.pin}</p><p class="small muted" style="margin-bottom:4px">${esc(l.lines)}</p><p class="small" style="color:var(--ok);font-weight:700">${esc(l.hours)}</p><div class="cta-row"><a class="btn sm" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(l.area+', '+l.city)}">Get Directions</a><button class="btn sm sec" data-act="lead" data-arg="callback|${esc(l.name)}">Request Callback</button></div></article>`).join('')}</div>`:''}
-    <div class="wiz-actions"><button class="btn sec" data-act="back">← Back</button><button class="link" data-act="home">Reset Finder</button></div>
-    <p class="disclaimer">Demo locations only. On the live site each distributor and garage would have its own indexable local page linked to the products it stocks.</p>
-  </div></section>`;
-}
-
-const VIEWS={home:viewHome,wizard:viewWizard,result:viewResult,product:viewProduct,catalogue:viewCatalogue,spec:viewSpec,search:viewSearch,compare:viewCompare,locator:viewLocator};
-function render(scroll=true){
-  $('#app').innerHTML=VIEWS[state.view]();
-  renderTray();
-  if(scroll){ window.scrollTo(0,0); const t=$('#view-title'); if(t) t.focus({preventScroll:true}); }
-}
-
-/* ============================ NAVIGATION ============================
-   Every screen is a serialisable state object pushed to browser history,
-   so in-app Back, the browser Back button and refresh all work.          */
-function navigate(patch,replace){
-  state={...state,...patch,depth:replace?(state.depth||0):(state.depth||0)+1};
-  try{ history[replace?'replaceState':'pushState'](state,''); }catch(e){}
-  closeMenu(); render(!replace);
-}
-function goHome(){ navigate(fresh()); }
-function startPath(path,presel={},labels={}){
-  const step=Object.keys(presel).length;
-  navigate({view:'wizard',path,step,sel:presel,labels,ctx:null});
-}
-function pickOption(i){
-  const path=PATHS[state.path], st=path.steps[state.step], o=st.opts(state.sel)[i];
-  if(st.multi){
-    let cur=[...(state.sel[st.key]||[])];
-    cur=cur.includes(o.v)?cur.filter(x=>x!==o.v):[...cur,o.v];
-    if(o.v==='normal'&&cur.includes('normal')) cur=['normal']; else cur=cur.length>1?cur.filter(x=>x!=='normal'):cur;
-    navigate({sel:{...state.sel,[st.key]:cur}},true); return;
-  }
-  Analytics.track(path.event,{step:st.key,value:o.v});
-  advance({...state.sel,[st.key]:o.v},{...state.labels,[st.key]:o.label});
-}
-function advance(sel,labels){
-  const path=PATHS[state.path];
-  if(state.step<path.steps.length-1){ navigate({step:state.step+1,sel,labels}); return; }
-  showResult(path.build(sel,labels));
-}
-function showResult(ctx){
-  const rec=recommend(ctx);
-  Analytics.track('recommendation_generated',{source:ctx.source,subject:ctx.subject,need:ctx.need,conditions:ctx.conditions,product:rec?rec.primary.id:null});
-  navigate({view:'result',ctx});
-}
-function closeMenu(){ const n=$('#mainnav'); if(n){ n.classList.remove('open'); $('.hamb').setAttribute('aria-expanded','false'); } }
-
-// Single delegated click handler: every interactive element carries data-act.
-const ACTIONS={
-  home:goHome,
-  back:()=>{ if(state.depth>0) history.back(); else goHome(); },
-  menu:()=>{ const n=$('#mainnav'),o=n.classList.toggle('open'); $('.hamb').setAttribute('aria-expanded',o); },
-  scroll:id=>{ const el=document.getElementById(id); if(el) el.scrollIntoView(); },
-  path:p=>{ Analytics.track('finder_opened',{pathway:p}); startPath(p); },
-  pick:i=>pickOption(+i),
-  continue:()=>{ const st=PATHS[state.path].steps[state.step]; advance({...state.sel,[st.key]:state.sel[st.key]||[]},state.labels); },
-  need:n=>{ const ctx={...state.ctx,need:n}; Analytics.track('recommendation_generated',{source:ctx.source,subject:ctx.subject,need:n}); navigate({ctx}); },
-  product:id=>{ Analytics.track('product_viewed',{product:id}); navigate({view:'product',productId:id}); },
-  catalogue:()=>navigate({view:'catalogue',cat:null}),
-  cat:c=>navigate({view:'catalogue',cat:c||null}),
-  spec:()=>navigate({view:'spec',spec:null}),
-  specpick:s=>{ Analytics.track('specification_searched',{specification:s}); navigate({view:'spec',spec:s}); },
-  search:q=>{ Analytics.track('finder_opened',{pathway:'search',query:q}); navigate({view:'search',query:q||''}); },
-  equiphit:a=>{ const [i,need]=a.split('|'), e=EQUIP_MODELS[+i]; Analytics.track('equipment_selected',{oem:e.oem,model:e.model}); showResult({source:'search',subject:`${e.oem} ${e.model}`,trail:[e.sector,e.type,e.oem,e.model],systems:e.systems,need,conditions:[]}); },
-  vehhit:i=>{ const v=VEHICLES[+i]; Analytics.track('vehicle_selected',{make:v.make,model:v.model}); startPath('vehicle',{vtype:v.type,make:v.make,model:v.model},{vtype:VEHICLE_TYPES.find(t=>t[0]===v.type)[2],make:v.make,model:v.model}); },
-  indhit:n=>{ Analytics.track('industry_selected',{value:n}); startPath('industry',{industry:n},{industry:n}); },
-  probhit:id=>startPath('problem',{problem:id},{problem:PROBLEMS.find(p=>p[0]===id)[2]}),
-  cmp:toggleCompare,
-  compare:()=>navigate({view:'compare'}),
-  clearcmp:()=>{ compare=[]; render(false); },
-  locator:k=>navigate({view:'locator',locKind:k||'distributor',locQuery:state.view==='locator'?state.locQuery:null}),
-  lead:a=>{ const [type,extra]=a.split('|'); openLead(type,extra); },
-  doc:a=>{ const [kind,id]=a.split('|'); openDoc(kind,id); },
-  mgmt:openMgmt, analytics:openAnalytics, demo:runDemo, close:closeModal,
-  ext:n=>toast(`“${n}” links to the existing Gulf website page. Outside the scope of this prototype.`)
-};
-document.addEventListener('click',e=>{
-  const b=e.target.closest('[data-act]'); if(!b) return;
-  const fn=ACTIONS[b.dataset.act]; if(fn){ e.preventDefault(); fn(b.dataset.arg||''); }
-});
-document.addEventListener('submit',e=>{
-  const f=e.target.dataset.form; if(!f) return; e.preventDefault();
-  const fd=new FormData(e.target);
-  if(f==='search') ACTIONS.search(fd.get('q').trim());
-  if(f==='spec'){ const s=fd.get('q').trim(); if(s) ACTIONS.specpick(s); }
-  if(f==='loc'){
-    const pin=fd.get('pin').trim(), city=fd.get('city').trim();
-    if(!pin&&!city){ $('#loc-err').textContent='Enter a pincode or a city.'; return; }
-    if(pin&&!/^\d{6}$/.test(pin)){ $('#loc-err').textContent='Enter a valid 6-digit pincode.'; return; }
-    Analytics.track(state.locKind==='garage'?'garage_search':'distributor_search',{pin,city});
-    navigate({locQuery:{pin,city}});
-  }
-  if(f==='lead') submitLead(e.target);
-});
-document.addEventListener('input',e=>{
-  const t=e.target;
-  if(t.id==='q'&&state.view==='search'){ state.query=t.value; try{history.replaceState(state,'');}catch(x){} $('#sr').innerHTML=searchResultsHTML(t.value); }
-  if(t.dataset.input==='compat'){ const v=t.value.toLowerCase(); document.querySelectorAll('#compat [data-c]').forEach(c=>c.hidden=!c.dataset.c.includes(v)); }
-  if(t.closest('[data-form=lead]')&&!leadStarted){ leadStarted=true; Analytics.track('lead_form_started',{type:leadType}); }
-});
-window.addEventListener('popstate',e=>{ if(demoRunning) return; state=e.state?{...fresh(),...e.state}:fresh(); render(); });
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
-
-/* ============================== MODALS ============================== */
-let lastFocus=null;
-function openModal(html,label){
-  lastFocus=document.activeElement;
-  $('#modal-root').innerHTML=`<div class="modal-bg" data-bg><div class="modal" role="dialog" aria-modal="true" aria-label="${esc(label)}"><button class="x" data-act="close" aria-label="Close">×</button>${html}</div></div>`;
-  $('#modal-root [data-bg]').addEventListener('mousedown',e=>{ if(e.target.dataset.bg!==undefined) closeModal(); });
-  const f=$('#modal-root input, #modal-root select, #modal-root .modal .btn')||$('#modal-root .x'); f.focus();
-}
-function closeModal(){ if(!$('#modal-root').innerHTML) return; $('#modal-root').innerHTML=''; if(lastFocus&&document.contains(lastFocus)) lastFocus.focus(); }
-let toastT; function toast(m){ $('#toast').textContent=m; clearTimeout(toastT); toastT=setTimeout(()=>$('#toast').textContent='',3800); }
-
-function openDoc(kind,id){
-  const p=byId(id), titles={tds:'Technical Data Sheet',specs:'Specifications',approvals:'Approvals'};
-  let body='';
-  if(kind==='approvals') body=`<p>OEM approvals for <strong>${esc(p.name)}</strong> are not shown in this prototype, to avoid presenting unverified claims.</p><p class="muted">In production this view lists each verified approval with its OEM, reference number and date, sourced from the Gulf technical database and linked to the OEM page.</p>`;
-  else body=`<div class="tblwrap"><table class="tbl"><tbody>${Object.entries(p.technicalData).map(([k,v])=>`<tr><th scope="row">${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}<tr><th scope="row">Suited conditions</th><td>${esc(p.tags.map(t=>TAGS[t]).join(', '))}</td></tr></tbody></table></div>${kind==='tds'?'<p class="muted small" style="margin-top:10px">Demo preview. In production this button downloads the current TDS PDF; the same fields are rendered on the page as HTML.</p>':''}`;
-  openModal(`<div class="eyebrow">${titles[kind]} <span class="demo-badge">demo</span></div><h2>${esc(p.name)}</h2>${body}<div class="cta-row"><button class="btn" data-act="lead" data-arg="expert">Talk to a Technical Expert</button><button class="btn sec" data-act="close">Close</button></div>`,titles[kind]);
-}
-function openMgmt(){
-  const items=[['Multi-path product discovery','Six ways in, one product database','home'],['Application-based recommendations','Engine, hydraulics, gears, grease','path|application'],['Equipment / OEM relationships','Sector → equipment → OEM → model','path|equipment'],['Specification matching','API, ACEA, JASO, ISO VG, SAE','spec'],['Problem-based search','Problem → solution → product','path|problem'],['Technical product information','TDS data rendered as HTML, not only PDF','product|superfleet-supreme'],['Product comparison','Up to three products side by side','catalogue'],['Lead capture','Every recommendation ends in a commercial action','lead|expert'],['Local distributor / garage discovery','Pincode and city search','locator|distributor'],['SEO/GEO-ready entity architecture','Each entity becomes an indexable page','search|JCB 3DX']];
-  openModal(`<div class="eyebrow">Management demo</div><h2>What this prototype demonstrates</h2><ol>${items.map(i=>{const [a,arg]=i[2].split('|');return `<li><strong>${i[0]}.</strong> <span class="muted">${i[1]}.</span> <button class="link" data-act="mgo" data-arg="${i[2]}">Show me</button></li>`;}).join('')}</ol><div class="cta-row"><button class="btn" data-act="demo">▶ Try a Demo Journey</button><button class="btn sec" data-act="close">Close</button></div><p class="disclaimer">All products, vehicles, equipment, specifications and locations are demonstration data.</p>`,'Management demo');
-}
-ACTIONS.mgo=a=>{ const [act,arg]=a.split('|'); closeModal(); ACTIONS[act](arg||''); };
-function openAnalytics(){
-  const ev=Analytics.events.slice().reverse();
-  openModal(`<div class="eyebrow">Prototype analytics</div><h2>First-party data this Finder would generate</h2><p class="muted small">${ev.length} event${ev.length===1?'':'s'} this session. In production these go to the analytics data layer and CRM.</p><div style="max-height:50vh;overflow:auto">${ev.map(e=>{const {event,ts,...rest}=e;return `<div class="evt"><strong>${esc(event)}</strong> ${esc(JSON.stringify(rest))} <span class="muted">${ts.slice(11,19)}</span></div>`;}).join('')||'<p class="muted">No events yet. Use the Finder and reopen this panel.</p>'}</div><div class="cta-row"><button class="btn sec" data-act="close">Close</button></div>`,'Prototype analytics');
-}
-
-/* ============================= LEAD FORM =============================
-   PRODUCTION flow: Website form → POST /api/leads → middleware → Salesforce
-   (Web-to-Lead or REST API /sobjects/Lead). LeadService.submit is the only
-   function to change; the payload is already CRM-shaped.                   */
-const LEAD_TITLES={expert:'Talk to a Gulf Technical Expert',quote:'Request a Quote',assessment:'Get a Lubrication Assessment',recommendation:'Get a Gulf Recommendation',callback:'Request a Callback'};
-let leadType='expert', leadStarted=false;
-function leadContext(){
-  if(state.view==='result'&&state.ctx){ const r=recommend(state.ctx); return `${r?r.primary.name:''} for ${state.ctx.subject} (${state.ctx.need})`; }
-  if(state.view==='product') return byId(state.productId).name;
-  if(state.view==='compare'&&compare.length) return 'Comparison: '+compare.map(id=>byId(id).name).join(' vs ');
-  if(state.view==='spec'&&state.spec) return 'Specification: '+state.spec;
-  return '';
-}
-function openLead(type,extra){
-  leadType=LEAD_TITLES[type]?type:'expert'; leadStarted=false;
-  Analytics.track('technical_expert_clicked',{cta:leadType,context:state.view});
-  const ctx=extra||leadContext();
-  const f=(id,label,attrs='',req=true)=>`<div class="field" data-f="${id}"><label for="l-${id}">${label}${req?' *':''}</label><input id="l-${id}" name="${id}" ${attrs}><span class="err" role="alert"></span></div>`;
-  openModal(`<div class="eyebrow">${type==='quote'?'Commercial enquiry':'Technical support'}</div><h2>${LEAD_TITLES[leadType]}</h2>
-  <form data-form="lead" novalidate><div class="formgrid">
-    ${f('name','Name','autocomplete="name"')}${f('company','Company','autocomplete="organization"',false)}
-    ${f('mobile','Mobile','type="tel" inputmode="numeric" maxlength="10" autocomplete="tel-national" placeholder="10-digit mobile"')}${f('email','Email','type="email" autocomplete="email"')}
-    ${f('city','City','autocomplete="address-level2"')}
-    <div class="field" data-f="userType"><label for="l-userType">User type *</label><select id="l-userType" name="userType"><option value="">Select…</option>${['Individual','Mechanic','Retailer','Distributor','Fleet','Industrial customer'].map(o=>`<option>${o}</option>`).join('')}</select><span class="err" role="alert"></span></div>
-  </div>
-  <div class="field" data-f="selection"><label for="l-selection">Selected product / application</label><input id="l-selection" name="selection" value="${esc(ctx)}" placeholder="e.g. JCB 3DX hydraulic fluid"></div>
-  <div class="field" data-f="requirement"><label for="l-requirement">Requirement</label><textarea id="l-requirement" name="requirement" rows="3" placeholder="Tell us about your equipment, volumes or the problem you want to solve"></textarea></div>
-  <div class="cta-row"><button class="btn" type="submit">Submit</button><button class="btn sec" type="button" data-act="close">Cancel</button></div>
-  <p class="small muted" style="margin-top:12px">Prototype: nothing is sent or stored outside this browser tab.</p></form>`,LEAD_TITLES[leadType]);
-}
-function validateLead(d){
-  const e={};
-  if(d.name.trim().length<2) e.name='Enter your name.';
-  if(!/^[6-9]\d{9}$/.test(d.mobile.trim())) e.mobile='Enter a valid 10-digit mobile number.';
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.email.trim())) e.email='Enter a valid email address.';
-  if(d.city.trim().length<2) e.city='Enter your city.';
-  if(!d.userType) e.userType='Select a user type.';
-  return e;
-}
-const LeadService={
-  // PRODUCTION: return fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
-  submit(payload){ return new Promise(res=>setTimeout(()=>res({ok:true,id:'DEMO-'+Date.now()}),500)); }
-};
-async function submitLead(form){
-  const d=Object.fromEntries(new FormData(form)), errs=validateLead(d);
-  form.querySelectorAll('.field').forEach(fl=>{ const k=fl.dataset.f, er=fl.querySelector('.err'); if(er){ er.textContent=errs[k]||''; fl.classList.toggle('bad',!!errs[k]); } });
-  const first=Object.keys(errs)[0]; if(first){ form.querySelector(`[name=${first}]`).focus(); return; }
-  // CRM-shaped payload (maps to Salesforce Lead fields + custom fields)
-  const payload={LastName:d.name,Company:d.company||'Individual',MobilePhone:d.mobile,Email:d.email,City:d.city,User_Type__c:d.userType,Requirement__c:d.requirement,Product_Interest__c:d.selection,LeadSource:'Website – Product Finder',CTA__c:leadType,Finder_Context__c:state.ctx?{trail:state.ctx.trail,need:state.ctx.need,conditions:state.ctx.conditions}:null};
-  form.querySelector('[type=submit]').disabled=true;
-  const r=await LeadService.submit(payload);
-  Analytics.track('lead_submitted',{cta:leadType,userType:d.userType,city:d.city,selection:d.selection,ref:r.id});
-  const m=$('#modal-root .modal'); if(!m) return;
-  m.innerHTML=`<button class="x" data-act="close" aria-label="Close">×</button><div class="eyebrow" style="color:var(--ok)">Requirement captured</div><h2>Thank you.</h2><p id="lead-ok">Thank you. Your requirement has been captured. A Gulf representative will contact you.</p><p class="small muted">Reference ${r.id} <span class="demo-badge">demo</span></p><div class="cta-row"><button class="btn" data-act="close">Continue</button><button class="btn sec" data-act="mgo" data-arg="locator|distributor">Find a Distributor</button></div>`;
-  m.querySelector('.btn').focus();
-}
-
-/* =========================== DEMO JOURNEY ===========================
-   Construction → Backhoe Loader → JCB → 3DX → Heavy duty + High temperature */
-async function runDemo(){
-  if(demoRunning) return; demoRunning=true; closeModal();
-  toast('Demo journey: Construction → Backhoe Loader → JCB → 3DX → Heavy duty → High temperature');
-  Analytics.track('finder_opened',{pathway:'equipment',demo:true});
-  startPath('equipment');
-  const clickLabel=async(label,wait=850)=>{ await sleep(wait); const b=[...document.querySelectorAll('#app button.opt')].find(x=>x.querySelector('strong').textContent===label); if(!b) return; b.classList.add('demo-pick'); b.scrollIntoView({block:'nearest'}); await sleep(450); b.click(); };
-  try{
-    for(const l of ['Construction','Backhoe Loader','JCB','3DX']) await clickLabel(l);
-    await clickLabel(TAGS.heavy); await clickLabel(TAGS.hot,500);
-    await sleep(800); const c=$('#app [data-act=continue]'); if(c) c.click();
-  } finally { demoRunning=false; }
-}
-
-/* =============================== INIT =============================== */
-(function init(){
-  // Restore the last screen after a refresh; fall back to the landing page on any problem.
-  try{ if(history.state&&VIEWS[history.state.view]){ state={...fresh(),...history.state}; render(); } else { history.replaceState(state,''); render(); } }
-  catch(e){ state=fresh(); render(); }
-  Analytics.track('finder_opened',{pathway:'landing'});
-})();
-</script>
+<!-- data.js = central data layer (one model for all modules). app.js = routing, engines and rendering. -->
+<script src="data.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
